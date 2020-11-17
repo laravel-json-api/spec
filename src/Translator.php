@@ -322,7 +322,7 @@ class Translator
      * @param string|null $locale
      * @return string|null
      */
-    protected function trans(string $key, string $member, array $replace = [], ?string $locale = null)
+    private function trans(string $key, string $member, array $replace = [], ?string $locale = null)
     {
         $value = $this->translator->get(
             $key = "jsonapi::spec.{$key}.{$member}",
@@ -340,7 +340,7 @@ class Translator
      * @param string|null $member
      * @return string
      */
-    protected function pointer(string $path, ?string $member = null): string
+    private function pointer(string $path, ?string $member = null): string
     {
         /** Member can be '0' which is an empty string. */
         $withoutMember = is_null($member) || '' === $member;

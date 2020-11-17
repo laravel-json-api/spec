@@ -836,6 +836,20 @@ class Test extends TestCase
                     'source' => ['pointer' => '/'],
                 ],
             ],
+            'data:to-one' => [
+                [
+                    'data' => [
+                        'type' => 'posts',
+                        'id' => '123',
+                    ],
+                ],
+                [
+                    'title' => 'Non-Compliant JSON API Document',
+                    'detail' => "The member data must be an array.",
+                    'status' => '400',
+                    'source' => ['pointer' => '/data'],
+                ],
+            ],
             'data.type:required' => [
                 [
                     'data' => [

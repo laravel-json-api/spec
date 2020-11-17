@@ -120,7 +120,7 @@ class ToMany extends Value
         if (!is_array($this->value->data)) {
             return $errors->push($this->translator->memberNotArray(
                 $this->parent(),
-                $this->member()
+                $this->member() ?: 'data'
             ));
         }
 
