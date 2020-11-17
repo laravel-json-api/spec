@@ -324,8 +324,10 @@ class Translator
      */
     private function trans(string $key, string $member, array $replace = [], ?string $locale = null)
     {
+        $namespace = JsonApiSpec::$translationNamespace;
+
         $value = $this->translator->get(
-            $key = "jsonapi::spec.{$key}.{$member}",
+            $key = "{$namespace}::spec.{$key}.{$member}",
             $replace,
             $locale
         ) ?: null;

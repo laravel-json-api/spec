@@ -19,21 +19,17 @@ declare(strict_types=1);
 
 namespace LaravelJsonApi\Spec\Tests\Integration;
 
-use Illuminate\Translation\Translator;
+use LaravelJsonApi\Spec\ServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
 
     /**
-     * @return void
+     * @inheritDoc
      */
-    protected function setUp(): void
+    protected function getPackageProviders($app)
     {
-        parent::setUp();
-
-        $this->app->afterResolving('translator', function (Translator $translator) {
-            $translator->addNamespace('jsonapi', __DIR__ . '/../../resources/lang');
-        });
+        return [ServiceProvider::class];
     }
 }
