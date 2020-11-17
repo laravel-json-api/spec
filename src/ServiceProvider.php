@@ -33,5 +33,7 @@ class ServiceProvider extends BaseServiceProvider
         $this->app->bind(Specification::class, static function (Application $app) {
             return $app->make(JsonApiSpec::$specification);
         });
+
+        $this->app->singleton(Translator::class);
     }
 }
