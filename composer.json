@@ -26,11 +26,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "../laravel"
-        },
-        {
-            "type": "path",
-            "url": "../eloquent"
+            "url": "../core"
         }
     ],
     "require": {
@@ -38,10 +34,10 @@
         "ext-json": "*",
         "illuminate/contracts": "^8.0",
         "illuminate/pipeline": "^8.0",
-        "illuminate/support": "^8.0"
+        "illuminate/support": "^8.0",
+        "laravel-json-api/core": "*"
     },
     "require-dev": {
-        "laravel-json-api/laravel": "*",
         "orchestra/testbench": "^6.4",
         "phpunit/phpunit": "^9.4"
     },
