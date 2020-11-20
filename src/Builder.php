@@ -21,7 +21,6 @@ namespace LaravelJsonApi\Spec;
 
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Arr;
-use JsonException;
 
 abstract class Builder
 {
@@ -71,7 +70,6 @@ abstract class Builder
     /**
      * @param string $json
      * @return Document
-     * @throws JsonException
      * @throws UnexpectedDocumentException
      */
     public function build(string $json): Document
@@ -92,13 +90,16 @@ abstract class Builder
     /**
      * @param string $json
      * @return object
-     * @throws JsonException
      * @throws UnexpectedDocumentException
      */
     private function decode(string $json): object
     {
-        if (is_string($json)) {
-            $json = json_decode($json, false, 512, JSON_THROW_ON_ERROR);
+        try {
+            if (is_string($json)) {
+                $json = json_decode($json, false, 512, JSON_THROW_ON_ERROR);
+            }
+        } catch (\JsonException $ex) {
+            throw new UnexpectedDocumentException('Invalid JSON.', 0, $ex);
         }
 
         if (is_object($json)) {

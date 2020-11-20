@@ -991,14 +991,18 @@ class Test extends TestCase
 
     public function testInvalidJson(): void
     {
-        $this->expectException(\JsonException::class);
-
         /** @var ResourceBuilder $builder */
         $builder = $this->app->make(ResourceBuilder::class);
 
-        $builder->expects('posts', '1')->build(
-            '{"data": {}"'
-        );
+        try {
+            $builder->expects('posts', '1')->build(
+                '{"data": {}"'
+            );
+
+            $this->fail('No exception thrown.');
+        } catch (UnexpectedDocumentException $ex) {
+            $this->assertInstanceOf(\JsonException::class, $ex->getPrevious());
+        }
     }
 
     /**
