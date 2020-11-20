@@ -11,9 +11,7 @@ matrix:
         - LARAVEL_VERSION=^8.0
 
 install:
-  - composer require "illuminate/contracts:${LARAVEL_VERSION}" --no-update -n
-  - composer require "illuminate/pipeline:${LARAVEL_VERSION}" --no-update -n
-  - composer require "illuminate/support:${LARAVEL_VERSION}" --no-update -n
+  - composer require "laravel/framework:${LARAVEL_VERSION}" --no-update -n
   - travis_retry composer install --no-suggest --prefer-dist -n -o
 
 script:

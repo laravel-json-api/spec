@@ -7,9 +7,9 @@
         "jsonapi",
         "laravel"
     ],
-    "homepage": "https://github.com/laravel-json-api/eloquent",
+    "homepage": "https://github.com/laravel-json-api/spec",
     "support": {
-        "issues": "https://github.com/laravel-json-api/eloquent/issues"
+        "issues": "https://github.com/laravel-json-api/spec/issues"
     },
     "license": "Apache-2.0",
     "authors": [
