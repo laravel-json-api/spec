@@ -19,9 +19,10 @@ declare(strict_types=1);
 
 namespace LaravelJsonApi\Spec;
 
+use LaravelJsonApi\Contracts\ErrorProvider;
 use LaravelJsonApi\Core\Document\ErrorList;
 
-class Document
+class Document implements ErrorProvider
 {
 
     /**
@@ -79,6 +80,14 @@ class Document
      * @return ErrorList
      */
     public function errors(): ErrorList
+    {
+        return $this->toErrors();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toErrors(): ErrorList
     {
         return $this->errors;
     }
