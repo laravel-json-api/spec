@@ -74,7 +74,7 @@ class ClientIdValidator
             );
         }
 
-        if ($error = $this->accept($data->id)) {
+        if ($error = $this->accept($document->type(), $data->id)) {
             $document->errors()->push($error);
         }
 
@@ -82,10 +82,11 @@ class ClientIdValidator
     }
 
     /**
+     * @param string $type
      * @param $value
      * @return Error|null
      */
-    private function accept($value): ?Error
+    private function accept(string $type, $value): ?Error
     {
         if (!is_string($value)) {
             return $this->translator->memberNotString('/data', 'id');
@@ -93,6 +94,10 @@ class ClientIdValidator
 
         if (empty($value)) {
             return $this->translator->memberEmpty('/data', 'id');
+        }
+
+        if ($this->spec->exists($type, $value)) {
+            return $this->translator->resourceExists($type, $value, '/data/id');
         }
 
         return null;

@@ -53,6 +53,9 @@ class Test extends TestCase
             ['users', [
                 $this->createAttribute('name'),
             ]],
+            ['podcasts', [
+                $this->createAttribute('title'),
+            ]],
         ]);
         $spec->method('types')->willReturn(['posts', 'users', 'comments', 'podcasts', 'tags']);
     }
@@ -140,7 +143,7 @@ class Test extends TestCase
                 [
                     'data' => [
                         'type' => 'posts',
-                        'id' => 'foobar',
+                        'id' => '999', // does not exist.
                         'attributes' => ['title' => 'Hello World'],
                     ],
                 ],
@@ -1073,6 +1076,53 @@ class Test extends TestCase
         $document = $builder
             ->expects('posts', null)
             ->build(json_encode($json));
+
+        $this->assertInvalid($document, [$expected]);
+    }
+
+    public function testCreateWithClientIdAllowed(): void
+    {
+        $data = [
+            'type' => 'podcasts',
+            'id' => '999', // 999 is set up to not-exist.
+            'attributes' => [
+                'title' => 'My first podcast',
+            ],
+        ];
+
+        /** @var ResourceBuilder $builder */
+        $builder = $this->app->make(ResourceBuilder::class);
+
+        $document = $builder
+            ->expects('podcasts', null)
+            ->build(json_encode(compact('data')));
+
+        $this->assertTrue($document->valid());
+    }
+
+    public function testCreateWithClientIdAlreadyExists(): void
+    {
+        $data = [
+            'type' => 'podcasts',
+            'id' => '123',
+            'attributes' => [
+                'title' => 'My first podcast',
+            ],
+        ];
+
+        $expected = [
+            'detail' => 'Resource 123 already exists.',
+            'source' => ['pointer' => '/data/id'],
+            'status' => '409',
+            'title' => 'Conflict',
+        ];
+
+        /** @var ResourceBuilder $builder */
+        $builder = $this->app->make(ResourceBuilder::class);
+
+        $document = $builder
+            ->expects('podcasts', null)
+            ->build(json_encode(compact('data')));
 
         $this->assertInvalid($document, [$expected]);
     }
