@@ -44,8 +44,11 @@ class ServerSpecification implements Specification
      */
     public function clientIds(string $resourceType): bool
     {
-        // @TODO
-        return false;
+        return $this->server
+            ->schemas()
+            ->schemaFor($resourceType)
+            ->id()
+            ->acceptsClientIds();
     }
 
     /**

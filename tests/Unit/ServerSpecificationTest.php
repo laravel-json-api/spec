@@ -19,13 +19,14 @@ declare(strict_types=1);
 
 namespace LaravelJsonApi\Spec\Tests\Unit;
 
+use LaravelJsonApi\Contracts\Schema\Container as SchemaContainer;
+use LaravelJsonApi\Contracts\Schema\ID;
 use LaravelJsonApi\Contracts\Schema\Schema;
 use LaravelJsonApi\Contracts\Server\Server;
 use LaravelJsonApi\Contracts\Store\Store;
 use LaravelJsonApi\Spec\ServerSpecification;
 use LaravelJsonApi\Spec\Tests\Integration\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
-use LaravelJsonApi\Contracts\Schema\Container as SchemaContainer;
 
 class ServerSpecificationTest extends TestCase
 {
@@ -48,6 +49,17 @@ class ServerSpecificationTest extends TestCase
         parent::setUp();
         $this->server = $this->createMock(Server::class);
         $this->spec = new ServerSpecification($this->server);
+    }
+
+    public function testClientIds(): void
+    {
+        $this->server->method('schemas')->willReturn($schemas = $this->createMock(SchemaContainer::class));
+        $schemas->method('schemaFor')->with('posts')->willReturn($schema = $this->createMock(Schema::class));
+        $schema->method('id')->willReturn($id = $this->createMock(ID::class));
+        $id->expects($this->exactly(2))->method('acceptsClientIds')->willReturnOnConsecutiveCalls(true, false);
+
+        $this->assertTrue($this->spec->clientIds('posts'));
+        $this->assertFalse($this->spec->clientIds('posts'));
     }
 
     public function testExists(): void
