@@ -1,6 +1,6 @@
 <?php
-/**
- * Copyright 2020 Cloud Creativity Limited
+/*
+ * Copyright 2021 Cloud Creativity Limited
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,10 +22,10 @@ namespace LaravelJsonApi\Spec\Tests\Integration;
 use LaravelJsonApi\Contracts\Schema\Attribute;
 use LaravelJsonApi\Contracts\Schema\Relation;
 use LaravelJsonApi\Spec\Document;
-use LaravelJsonApi\Spec\UnexpectedDocumentException;
 use LaravelJsonApi\Spec\RelationBuilder;
 use LaravelJsonApi\Spec\ResourceBuilder;
 use LaravelJsonApi\Spec\Specification;
+use LaravelJsonApi\Spec\UnexpectedDocumentException;
 use LogicException;
 
 class Test extends TestCase
