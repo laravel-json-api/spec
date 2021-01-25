@@ -1,9 +1,16 @@
 # laravel-json-api/spec
 
-## Status
+Validate JSON documents for compliance with the JSON:API specification.
+Part of the [Laravel JSON:API](https://laraveljsonapi.io) library.
 
-This package is in development.
+## Installation
+
+Install using [Composer](https://getcomposer.org)
+
+```bash
+composer require laravel-json-api/spec
+```
 
 ## License
 
-Laravel JSON API is open-sourced software licensed under the [Apache 2.0 License](./LICENSE).
+Laravel JSON:API is open-sourced software licensed under the [Apache 2.0 License](./LICENSE).
