@@ -21,8 +21,8 @@ namespace LaravelJsonApi\Spec\Validators;
 
 use LaravelJsonApi\Contracts\Schema\Relation;
 use LaravelJsonApi\Core\Document\ErrorList;
-use LaravelJsonApi\Spec\ResourceDocument;
 use LaravelJsonApi\Spec\Factory;
+use LaravelJsonApi\Spec\ResourceDocument;
 use LaravelJsonApi\Spec\Specification;
 use LaravelJsonApi\Spec\Translator;
 
