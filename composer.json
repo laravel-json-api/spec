@@ -28,7 +28,7 @@
         "illuminate/contracts": "^8.0",
         "illuminate/pipeline": "^8.0",
         "illuminate/support": "^8.0",
-        "laravel-json-api/core": "^1.0@alpha"
+        "laravel-json-api/core": "^1.0.0-alpha.1"
     },
     "require-dev": {
         "orchestra/testbench": "^6.9",
@@ -47,9 +47,14 @@
     "extra": {
         "branch-alias": {
             "dev-develop": "1.x-dev"
+        },
+        "laravel": {
+            "providers": [
+                "LaravelJsonApi\\Spec\\ServiceProvider"
+            ]
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
         "sort-packages": true
