@@ -230,6 +230,22 @@ class ToOneTest extends TestCase
                     'source' => ['pointer' => '/data'],
                 ],
             ],
+            'data:to-many' => [
+                [
+                    'data' => [
+                        [
+                            'type' => 'users',
+                            'id' => '1',
+                        ],
+                    ],
+                ],
+                [
+                    'title' => 'Non-Compliant JSON API Document',
+                    'detail' => 'The field author must be a to-one relation.',
+                    'status' => '400',
+                    'source' => ['pointer' => '/data'],
+                ],
+            ],
         ];
     }
 

@@ -70,6 +70,17 @@ class ToManyTest extends TestCase
                 ],
                 [
                     'title' => 'Non-Compliant JSON API Document',
+                    'detail' => "The field tags must be a to-many relation.",
+                    'status' => '400',
+                    'source' => ['pointer' => '/data'],
+                ],
+            ],
+            'data:not array' => [
+                [
+                    'data' => false,
+                ],
+                [
+                    'title' => 'Non-Compliant JSON API Document',
                     'detail' => "The member data must be an array.",
                     'status' => '400',
                     'source' => ['pointer' => '/data'],

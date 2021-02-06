@@ -283,7 +283,7 @@ class ResourceTest extends TestCase
                             'slug' => 'hello-world',
                         ],
                         'relationships' => [
-                            'author' => [],
+                            'author' => false,
                         ],
                     ],
                 ],
@@ -438,6 +438,57 @@ class ResourceTest extends TestCase
                     'source' => ['pointer' => '/data/relationships/author'],
                 ],
             ],
+            'data.relationships.*: rejected to-many for to-one' => [
+                [
+                    'data' => [
+                        'type' => 'posts',
+                        'attributes' => [
+                            'title' => 'Hello World',
+                            'content' => '...',
+                            'slug' => 'hello-world',
+                        ],
+                        'relationships' => [
+                            'author' => [
+                                'data' => [
+                                    [
+                                        'type' => 'users',
+                                        'id' => '123',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                [
+                    'title' => 'Non-Compliant JSON API Document',
+                    'detail' => 'The field author must be a to-one relation.',
+                    'status' => '400',
+                    'source' => ['pointer' => '/data/relationships/author'],
+                ],
+            ],
+            'data.relationships.*.data.*:not array' => [
+                [
+                    'data' => [
+                        'type' => 'posts',
+                        'attributes' => [
+                            'title' => 'Hello World',
+                            'content' => '...',
+                            'slug' => 'hello-world',
+                        ],
+                        'relationships' => [
+                            'tags' => [
+                                'data' => false,
+                            ],
+                        ],
+                    ],
+                ],
+                [
+                    'title' => 'Non-Compliant JSON API Document',
+                    'detail' => "The member data must be an array.",
+                    'status' => '400',
+                    'source' => ['pointer' => '/data/relationships/tags/data'],
+                ],
+            ],
             'data.relationships.*.data.*:not object' => [
                 [
                     'data' => [
@@ -549,6 +600,32 @@ class ResourceTest extends TestCase
                     'detail' => 'The related resource does not exist.',
                     'status' => '404',
                     'source' => ['pointer' => '/data/relationships/tags/data/0'],
+                ],
+            ],
+            'data.relationships.*: rejected to-one for to-many' => [
+                [
+                    'data' => [
+                        'type' => 'posts',
+                        'attributes' => [
+                            'title' => 'Hello World',
+                            'content' => '...',
+                            'slug' => 'hello-world',
+                        ],
+                        'relationships' => [
+                            'tags' => [
+                                'data' => [
+                                    'type' => 'tags',
+                                    'id' => '123',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                [
+                    'title' => 'Non-Compliant JSON API Document',
+                    'detail' => 'The field tags must be a to-many relation.',
+                    'status' => '400',
+                    'source' => ['pointer' => '/data/relationships/tags'],
                 ],
             ],
         ];

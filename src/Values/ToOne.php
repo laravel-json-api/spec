@@ -38,6 +38,11 @@ class ToOne extends Value
     private Factory $factory;
 
     /**
+     * @var string
+     */
+    private string $name;
+
+    /**
      * @var mixed
      */
     private $value;
@@ -52,13 +57,20 @@ class ToOne extends Value
      *
      * @param Translator $translator
      * @param Factory $factory
+     * @param string $name
      * @param string $path
      * @param mixed $value
      */
-    public function __construct(Translator $translator, Factory $factory, string $path, $value)
-    {
+    public function __construct(
+        Translator $translator,
+        Factory $factory,
+        string $name,
+        string $path,
+        $value
+    ) {
         $this->translator = $translator;
         $this->factory = $factory;
+        $this->name = $name;
         $this->path = rtrim($path, '/');
         $this->value = $value;
     }
@@ -115,6 +127,14 @@ class ToOne extends Value
             return $errors->push($this->translator->memberRequired(
                 $this->path ?: '/',
                 'data'
+            ));
+        }
+
+        if (is_array($this->value->data)) {
+            return $errors->push($this->translator->fieldExpectsToOne(
+                $this->parent(),
+                $this->member() ?: 'data',
+                $this->name
             ));
         }
 

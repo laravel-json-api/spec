@@ -82,6 +82,18 @@ return [
         'code' => '',
     ],
 
+    'field_expects_to_one' => [
+        'title' => 'Non-Compliant JSON API Document',
+        'detail' => 'The field :field must be a to-one relation.',
+        'code' => '',
+    ],
+
+    'field_expects_to_many' => [
+        'title' => 'Non-Compliant JSON API Document',
+        'detail' => 'The field :field must be a to-many relation.',
+        'code' => '',
+    ],
+
     'resource_type_not_supported' => [
         'title' => 'Not Supported',
         'detail' => 'Resource type :type is not supported by this endpoint.',
