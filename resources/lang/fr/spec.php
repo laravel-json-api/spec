@@ -80,7 +80,7 @@ return [
      * @TODO requires translation
      */
     'member_field_not_supported' => [
-        'title' => 'Non-Compliant JSON:API Document',
+        'title' => 'Document JSON:API invalide',
         'detail' => 'The field :field is not a supported :type.',
         'code' => '',
     ],
@@ -89,7 +89,7 @@ return [
      * @TODO requires translation
      */
     'field_expects_to_one' => [
-        'title' => 'Non-Compliant JSON:API Document',
+        'title' => 'Document JSON:API invalide',
         'detail' => 'The field :field must be a to-one relation.',
         'code' => '',
     ],
@@ -98,7 +98,7 @@ return [
      * @TODO requires translation
      */
     'field_expects_to_many' => [
-        'title' => 'Non-Compliant JSON:API Document',
+        'title' => 'Document JSON:API invalide',
         'detail' => 'The field :field must be a to-many relation.',
         'code' => '',
     ],
