@@ -55,7 +55,7 @@ class ToManyTest extends TestCase
             'data:required' => [
                 new \stdClass(),
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member data is required.",
                     'status' => '400',
                     'source' => ['pointer' => '/'],
@@ -69,7 +69,7 @@ class ToManyTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The field tags must be a to-many relation.",
                     'status' => '400',
                     'source' => ['pointer' => '/data'],
@@ -80,7 +80,7 @@ class ToManyTest extends TestCase
                     'data' => false,
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member data must be an array.",
                     'status' => '400',
                     'source' => ['pointer' => '/data'],
@@ -93,7 +93,7 @@ class ToManyTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member type is required.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/0'],
@@ -106,7 +106,7 @@ class ToManyTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member type must be a string.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/0/type'],
@@ -119,7 +119,7 @@ class ToManyTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member type cannot be empty.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/0/type'],
@@ -145,7 +145,7 @@ class ToManyTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member id is required.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/0'],
@@ -158,7 +158,7 @@ class ToManyTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member id must be a string.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/0/id'],
@@ -171,7 +171,7 @@ class ToManyTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member id must be a string.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/0/id'],
@@ -184,7 +184,7 @@ class ToManyTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member id cannot be empty.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/0/id'],
@@ -216,7 +216,7 @@ class ToManyTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => 'The member 0 must be a resource identifier.',
                     'status' => '400',
                     'source' => ['pointer' => '/data/0'],

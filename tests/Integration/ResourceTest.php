@@ -69,7 +69,7 @@ class ResourceTest extends TestCase
             'data:required' => [
                 new \stdClass(),
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member data is required.",
                     'status' => '400',
                     'source' => ['pointer' => '/'],
@@ -78,7 +78,7 @@ class ResourceTest extends TestCase
             'data:not object' => [
                 ['data' => []],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member data must be an object.",
                     'status' => '400',
                     'source' => ['pointer' => '/data'],
@@ -91,7 +91,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member type is required.",
                     'status' => '400',
                     'source' => ['pointer' => '/data'],
@@ -105,7 +105,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member type must be a string.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/type'],
@@ -119,7 +119,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member type cannot be empty.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/type'],
@@ -162,7 +162,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member attributes must be an object.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/attributes'],
@@ -178,7 +178,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member attributes cannot have a type field.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/attributes'],
@@ -194,7 +194,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member attributes cannot have a id field.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/attributes'],
@@ -212,7 +212,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => 'The field foo is not a supported attribute.',
                     'status' => '400',
                     'source' => ['pointer' => '/data/attributes'],
@@ -231,7 +231,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member relationships must be an object.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships'],
@@ -249,7 +249,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member relationships cannot have a type field.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships'],
@@ -267,7 +267,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member relationships cannot have a id field.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships'],
@@ -288,7 +288,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member author must be an object.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships/author'],
@@ -310,7 +310,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => 'The field foo is not a supported relationship.',
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships'],
@@ -333,7 +333,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member data is required.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships/author'],
@@ -356,7 +356,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member data must be an object.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships/author/data'],
@@ -381,7 +381,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member type is required.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships/author/data'],
@@ -406,7 +406,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member id is required.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships/author/data'],
@@ -460,7 +460,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => 'The field author must be a to-one relation.',
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships/author'],
@@ -483,7 +483,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member data must be an array.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships/tags/data'],
@@ -508,7 +508,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member 0 must be an object.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships/tags/data/0'],
@@ -538,7 +538,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member type is required.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships/tags/data/0'],
@@ -568,7 +568,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member id is required.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships/tags/data/0'],
@@ -622,7 +622,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => 'The field tags must be a to-many relation.',
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships/tags'],
@@ -645,7 +645,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member id is required.",
                     'status' => '400',
                     'source' => ['pointer' => '/data'],
@@ -660,7 +660,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member id must be a string.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/id'],
@@ -675,7 +675,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member id must be a string.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/id'],
@@ -690,7 +690,7 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member id cannot be empty.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/id'],
@@ -890,13 +890,13 @@ class ResourceTest extends TestCase
                 'detail' => 'The author field cannot exist as an attribute and a relationship.',
                 'source' => ['pointer' => '/data'],
                 'status' => '400',
-                'title' => 'Non-Compliant JSON API Document',
+                'title' => 'Non-Compliant JSON:API Document',
             ],
             [
                 'detail' => 'The field author is not a supported attribute.',
                 'source' => ['pointer' => '/data/attributes'],
                 'status' => '400',
-                'title' => 'Non-Compliant JSON API Document',
+                'title' => 'Non-Compliant JSON:API Document',
             ],
         ];
 

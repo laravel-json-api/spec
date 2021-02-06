@@ -55,7 +55,7 @@ class ToOneTest extends TestCase
             'data:required' => [
                 new \stdClass(),
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member data is required.",
                     'status' => '400',
                     'source' => ['pointer' => '/'],
@@ -64,7 +64,7 @@ class ToOneTest extends TestCase
             'data:not object' => [
                 ['data' => false],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member data must be an object.",
                     'status' => '400',
                     'source' => ['pointer' => '/data'],
@@ -77,7 +77,7 @@ class ToOneTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member type is required.",
                     'status' => '400',
                     'source' => ['pointer' => '/data'],
@@ -91,7 +91,7 @@ class ToOneTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member type must be a string.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/type'],
@@ -105,7 +105,7 @@ class ToOneTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member type cannot be empty.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/type'],
@@ -132,7 +132,7 @@ class ToOneTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member id is required.",
                     'status' => '400',
                     'source' => ['pointer' => '/data'],
@@ -146,7 +146,7 @@ class ToOneTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member id must be a string.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/id'],
@@ -160,7 +160,7 @@ class ToOneTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member id must be a string.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/id'],
@@ -174,7 +174,7 @@ class ToOneTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member id cannot be empty.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/id'],
@@ -205,7 +205,7 @@ class ToOneTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => 'The member data must be a resource identifier.',
                     'status' => '400',
                     'source' => ['pointer' => '/data'],
@@ -224,7 +224,7 @@ class ToOneTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => 'The member data must be a resource identifier.',
                     'status' => '400',
                     'source' => ['pointer' => '/data'],
@@ -240,7 +240,7 @@ class ToOneTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => 'The field author must be a to-one relation.',
                     'status' => '400',
                     'source' => ['pointer' => '/data'],
