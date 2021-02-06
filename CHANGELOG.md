@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
+- Added French translations for error messages.
 - If a *to-many* relation is sent for a *to-one* field (and vice versa), the value will be rejected with a new message
   that clearly indicates that the relation type is invalid.
 
