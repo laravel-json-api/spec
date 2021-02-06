@@ -19,7 +19,11 @@ declare(strict_types=1);
 
 namespace LaravelJsonApi\Spec\Tests\Integration;
 
+use LaravelJsonApi\Contracts\Schema\Attribute;
+use LaravelJsonApi\Contracts\Schema\Relation;
+use LaravelJsonApi\Spec\Document;
 use LaravelJsonApi\Spec\ServiceProvider;
+use LaravelJsonApi\Spec\Specification;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
@@ -31,5 +35,56 @@ class TestCase extends BaseTestCase
     protected function getPackageProviders($app)
     {
         return [ServiceProvider::class];
+    }
+
+    /**
+     * @param Document $document
+     * @param array $expected
+     */
+    protected function assertInvalid(Document $document, array $expected): void
+    {
+        $this->assertFalse($document->valid());
+        $this->assertTrue($document->invalid());
+        $this->assertSame($expected, $document->errors()->toArray());
+    }
+
+    /**
+     * @param string $name
+     * @return Attribute
+     */
+    protected function createAttribute(string $name): Attribute
+    {
+        $attr = $this->createMock(Attribute::class);
+        $attr->method('name')->willReturn($name);
+
+        return $attr;
+    }
+
+    /**
+     * @param string $name
+     * @return Relation
+     */
+    protected function createToOne(string $name): Relation
+    {
+        $relation = $this->createMock(Relation::class);
+        $relation->method('name')->willReturn($name);
+        $relation->method('toOne')->willReturn(true);
+        $relation->method('toMany')->willReturn(false);
+
+        return $relation;
+    }
+
+    /**
+     * @param string $name
+     * @return Relation
+     */
+    protected function createToMany(string $name): Relation
+    {
+        $relation = $this->createMock(Relation::class);
+        $relation->method('name')->willReturn($name);
+        $relation->method('toOne')->willReturn(false);
+        $relation->method('toMany')->willReturn(true);
+
+        return $relation;
     }
 }
