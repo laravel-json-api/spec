@@ -76,30 +76,21 @@ return [
         'code' => '',
     ],
 
-    /**
-     * @TODO requires translation
-     */
     'member_field_not_supported' => [
         'title' => 'Document JSON:API invalide',
-        'detail' => 'The field :field is not a supported :type.',
+        'detail' => "Le champ :field n'est pas un élément de type :type reconnu.",
         'code' => '',
     ],
 
-    /**
-     * @TODO requires translation
-     */
     'field_expects_to_one' => [
         'title' => 'Document JSON:API invalide',
-        'detail' => 'The field :field must be a to-one relation.',
+        'detail' => 'Le champ :field doit être une relation "to-one".',
         'code' => '',
     ],
 
-    /**
-     * @TODO requires translation
-     */
     'field_expects_to_many' => [
         'title' => 'Document JSON:API invalide',
-        'detail' => 'The field :field must be a to-many relation.',
+        'detail' => 'Le champ :field doit être une relation "to-many".',
         'code' => '',
     ],
 
