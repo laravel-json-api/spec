@@ -19,10 +19,6 @@ declare(strict_types=1);
 
 namespace LaravelJsonApi\Spec\Tests\Integration;
 
-use LaravelJsonApi\Contracts\Schema\Attribute;
-use LaravelJsonApi\Contracts\Schema\Relation;
-use LaravelJsonApi\Spec\Document;
-use LaravelJsonApi\Spec\RelationBuilder;
 use LaravelJsonApi\Spec\ResourceBuilder;
 use LaravelJsonApi\Spec\Specification;
 use LaravelJsonApi\Spec\UnexpectedDocumentException;

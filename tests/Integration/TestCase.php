@@ -23,7 +23,6 @@ use LaravelJsonApi\Contracts\Schema\Attribute;
 use LaravelJsonApi\Contracts\Schema\Relation;
 use LaravelJsonApi\Spec\Document;
 use LaravelJsonApi\Spec\ServiceProvider;
-use LaravelJsonApi\Spec\Specification;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
