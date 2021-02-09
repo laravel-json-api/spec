@@ -149,6 +149,42 @@ class Translator
     }
 
     /**
+     * Create an error for when a to-one relation is expected, but a to-many has been sent.
+     *
+     * @param string $path
+     * @param string $member
+     * @param string $field
+     * @return Error
+     */
+    public function fieldExpectsToOne(string $path, string $member, string $field): Error
+    {
+        return Error::make()
+            ->setStatus(400)
+            ->setCode($this->trans('field_expects_to_one', 'code'))
+            ->setTitle($this->trans('field_expects_to_one', 'title'))
+            ->setDetail($this->trans('field_expects_to_one', 'detail', compact('field')))
+            ->setSourcePointer($this->pointer($path, $member));
+    }
+
+    /**
+     * Create an error for when a to-many relation is expected, but a to-one has been sent.
+     *
+     * @param string $path
+     * @param string $member
+     * @param string $field
+     * @return Error
+     */
+    public function fieldExpectsToMany(string $path, string $member, string $field): Error
+    {
+        return Error::make()
+            ->setStatus(400)
+            ->setCode($this->trans('field_expects_to_many', 'code'))
+            ->setTitle($this->trans('field_expects_to_many', 'title'))
+            ->setDetail($this->trans('field_expects_to_many', 'detail', compact('field')))
+            ->setSourcePointer($this->pointer($path, $member));
+    }
+
+    /**
      * Create an error for a member that must be a string.
      *
      * @param string $path

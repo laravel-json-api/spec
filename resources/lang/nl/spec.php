@@ -1,6 +1,6 @@
 <?php
-/**
- * Copyright 2020 Cloud Creativity Limited
+/*
+ * Copyright 2021 Cloud Creativity Limited
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | The following language lines contain the default translatable members
-    | of JSON API error objects. According to the JSON API spec, the
+    | of JSON:API error objects. According to the JSON:API spec, the
     | `title` and `detail` members can be localized. In addition the `code`
     | member is also read from this package if you want to give the error
     | a specific code.
@@ -35,50 +35,68 @@ return [
     */
 
     'member_required' => [
-        'title' => 'Niet-Conform JSON API Document',
+        'title' => 'Niet-Conform JSON:API Document',
         'detail' => 'Het onderdeel :member is vereist.',
         'code' => '',
     ],
 
     'member_object_expected' => [
-        'title' => 'Niet-Conform JSON API Document',
+        'title' => 'Niet-Conform JSON:API Document',
         'detail' => 'Het onderdeel :member moet een object zijn.',
         'code' => '',
     ],
 
     'member_array_expected' => [
-        'title' => 'Non-Compliant JSON API Document',
+        'title' => 'Non-Compliant JSON:API Document',
         'detail' => 'Het onderdeel :member moet een array zijn.',
         'code' => '',
     ],
 
     'member_identifier_expected' => [
-        'title' => 'Niet-Conform JSON API Document',
+        'title' => 'Niet-Conform JSON:API Document',
         'detail' => 'Het onderdeel :member moet een resource identifier zijn.',
         'code' => '',
     ],
 
     'member_string_expected' => [
-        'title' => 'Niet-Conform JSON API Document',
+        'title' => 'Niet-Conform JSON:API Document',
         'detail' => 'Het onderdeel :member moet een string zijn.',
         'code' => '',
     ],
 
     'member_empty' => [
-        'title' => 'Niet-Conform JSON API Document',
+        'title' => 'Niet-Conform JSON:API Document',
         'detail' => 'Het onderdeel :member kan niet leeg zijn.',
         'code' => '',
     ],
 
     'member_field_not_allowed' => [
-        'title' => 'Niet-Conform JSON API Document',
+        'title' => 'Niet-Conform JSON:API Document',
         'detail' => 'Het onderdeel :member kan niet een veld :field hebben.',
         'code' => '',
     ],
 
     'member_field_not_supported' => [
-        'title' => 'Non-Compliant JSON API Document',
+        'title' => 'Niet-Conform JSON:API Document',
         'detail' => 'Het veld :field is geen ondersteund :type.',
+        'code' => '',
+    ],
+
+    /**
+     * @TODO requires translation.
+     */
+    'field_expects_to_one' => [
+        'title' => 'Niet-Conform JSON:API Document',
+        'detail' => 'The field :field must be a to-one relation.',
+        'code' => '',
+    ],
+
+    /**
+     * @TODO requires translation
+     */
+    'field_expects_to_many' => [
+        'title' => 'Niet-Conform JSON:API Document',
+        'detail' => 'The field :field must be a to-many relation.',
         'code' => '',
     ],
 
@@ -119,7 +137,7 @@ return [
     ],
 
     'resource_field_exists_in_attributes_and_relationships' => [
-        'title' => 'Niet-Conform JSON API Document',
+        'title' => 'Niet-Conform JSON:API Document',
         'detail' => 'Het veld :field kan niet bestaan als een attribuut en een relatie.',
         'code' => '',
     ],

@@ -38,6 +38,11 @@ class ToMany extends Value
     private Factory $factory;
 
     /**
+     * @var string
+     */
+    private string $name;
+
+    /**
      * @var mixed
      */
     private $value;
@@ -52,13 +57,15 @@ class ToMany extends Value
      *
      * @param Translator $translator
      * @param Factory $factory
+     * @param string $name
      * @param string $path
      * @param mixed $value
      */
-    public function __construct(Translator $translator, Factory $factory, string $path, $value)
+    public function __construct(Translator $translator, Factory $factory, string $name, string $path, $value)
     {
         $this->translator = $translator;
         $this->factory = $factory;
+        $this->name = $name;
         $this->path = rtrim($path, '/');
         $this->value = $value;
     }
@@ -117,10 +124,18 @@ class ToMany extends Value
             ));
         }
 
+        if (is_object($this->value->data) && (isset($this->value->data->type) || isset($this->value->data->id))) {
+            return $errors->push($this->translator->fieldExpectsToMany(
+                $this->parent(),
+                $this->member() ?: 'data',
+                $this->name
+            ));
+        }
+
         if (!is_array($this->value->data)) {
             return $errors->push($this->translator->memberNotArray(
-                $this->parent(),
-                $this->member() ?: 'data'
+                $this->path,
+                'data'
             ));
         }
 

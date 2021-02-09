@@ -64,24 +64,26 @@ class Factory
     /**
      * Create a to-one relationship object.
      *
+     * @param string $name
      * @param string $path
      * @param $value
      * @return ToOne
      */
-    public function createToOneValue(string $path, $value): ToOne
+    public function createToOneValue(string $name, string $path, $value): ToOne
     {
-        return new ToOne($this->translator, $this, $path, $value);
+        return new ToOne($this->translator, $this, $name, $path, $value);
     }
 
     /**
      * Create a to-many relationship object.
      *
+     * @param string $name
      * @param string $path
      * @param $value
      * @return ToMany
      */
-    public function createToManyValue(string $path, $value): ToMany
+    public function createToManyValue(string $name, string $path, $value): ToMany
     {
-        return new ToMany($this->translator, $this, $path, $value);
+        return new ToMany($this->translator, $this, $name, $path, $value);
     }
 }

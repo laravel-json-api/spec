@@ -35,104 +35,104 @@ return [
     */
 
     'member_required' => [
-        'title' => 'Non-Compliant JSON:API Document',
-        'detail' => 'The member :member is required.',
+        'title' => 'Document JSON:API invalide',
+        'detail' => 'Le membre :member est obligatoire.',
         'code' => '',
     ],
 
     'member_object_expected' => [
-        'title' => 'Non-Compliant JSON:API Document',
-        'detail' => 'The member :member must be an object.',
+        'title' => 'Document JSON:API invalide',
+        'detail' => 'Le membre :member doit être un objet.',
         'code' => '',
     ],
 
     'member_array_expected' => [
-        'title' => 'Non-Compliant JSON:API Document',
-        'detail' => 'The member :member must be an array.',
+        'title' => 'Document JSON:API invalide',
+        'detail' => 'Le membre :member doit être un tableau.',
         'code' => '',
     ],
 
     'member_identifier_expected' => [
-        'title' => 'Non-Compliant JSON:API Document',
-        'detail' => 'The member :member must be a resource identifier.',
+        'title' => 'Document JSON:API invalide',
+        'detail' => 'Le membre :member doit être un identifiant de ressource.',
         'code' => '',
     ],
 
     'member_string_expected' => [
-        'title' => 'Non-Compliant JSON:API Document',
-        'detail' => 'The member :member must be a string.',
+        'title' => 'Document JSON:API invalide',
+        'detail' => 'Le membre :member doit être une chaîne de caractères.',
         'code' => '',
     ],
 
     'member_empty' => [
-        'title' => 'Non-Compliant JSON:API Document',
-        'detail' => 'The member :member cannot be empty.',
+        'title' => 'Document JSON:API invalide',
+        'detail' => 'Le membre :member ne peut être vide.',
         'code' => '',
     ],
 
     'member_field_not_allowed' => [
-        'title' => 'Non-Compliant JSON:API Document',
-        'detail' => 'The member :member cannot have a :field field.',
+        'title' => 'Document JSON:API invalide',
+        'detail' => 'Le membre :member ne peut avoir de champ :field.',
         'code' => '',
     ],
 
     'member_field_not_supported' => [
-        'title' => 'Non-Compliant JSON:API Document',
-        'detail' => 'The field :field is not a supported :type.',
+        'title' => 'Document JSON:API invalide',
+        'detail' => "Le champ :field n'est pas un élément de type :type reconnu.",
         'code' => '',
     ],
 
     'field_expects_to_one' => [
-        'title' => 'Non-Compliant JSON:API Document',
-        'detail' => 'The field :field must be a to-one relation.',
+        'title' => 'Document JSON:API invalide',
+        'detail' => 'Le champ :field doit être une relation "to-one".',
         'code' => '',
     ],
 
     'field_expects_to_many' => [
-        'title' => 'Non-Compliant JSON:API Document',
-        'detail' => 'The field :field must be a to-many relation.',
+        'title' => 'Document JSON:API invalide',
+        'detail' => 'Le champ :field doit être une relation "to-many".',
         'code' => '',
     ],
 
     'resource_type_not_supported' => [
-        'title' => 'Not Supported',
-        'detail' => 'Resource type :type is not supported by this endpoint.',
+        'title' => 'Non supporté',
+        'detail' => "Le type de ressource :type n'est pas supporté par ce endpoint.",
         'code' => '',
     ],
 
     'resource_type_not_recognised' => [
-        'title' => 'Not Supported',
-        'detail' => 'Resource type :type is not recognised.',
+        'title' => 'Non supporté',
+        'detail' => "Le type de ressource :type n'est pas reconnu.",
         'code' => '',
     ],
 
     'resource_id_not_supported' => [
-        'title' => 'Not Supported',
-        'detail' => 'Resource id :id is not supported by this endpoint.',
+        'title' => 'Non supporté',
+        'detail' => "L'identifiant de ressource :id n'est pas supporté par ce endpoint.",
         'code' => '',
     ],
 
     'resource_client_ids_not_supported' => [
-        'title' => 'Not Supported',
-        'detail' => 'Resource type :type does not support client-generated IDs.',
+        'title' => 'Non supporté',
+        'detail' => "Le type de ressource :type n'accepte pas les identifiants générés par le client.",
         'code' => '',
     ],
 
     'resource_exists' => [
-        'title' => 'Conflict',
-        'detail' => 'Resource :id already exists.',
+        'title' => 'Conflit',
+        'detail' => 'La ressource :id existe déjà.',
         'code' => '',
     ],
 
     'resource_not_found' => [
-        'title' => 'Not Found',
-        'detail' => 'The related resource does not exist.',
+        'title' => 'Introuvable',
+        'detail' => "La ressource spécifiée n'existe pas.",
         'code' => '',
     ],
 
     'resource_field_exists_in_attributes_and_relationships' => [
-        'title' => 'Non-Compliant JSON:API Document',
-        'detail' => 'The :field field cannot exist as an attribute and a relationship.',
+        'title' => "Document JSON:API invalide",
+        'detail' => 'Le champ :field ne peut être à la fois un attribut et une relation.',
         'code' => '',
     ],
 ];

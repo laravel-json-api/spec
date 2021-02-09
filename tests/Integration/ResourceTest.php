@@ -19,16 +19,12 @@ declare(strict_types=1);
 
 namespace LaravelJsonApi\Spec\Tests\Integration;
 
-use LaravelJsonApi\Contracts\Schema\Attribute;
-use LaravelJsonApi\Contracts\Schema\Relation;
-use LaravelJsonApi\Spec\Document;
-use LaravelJsonApi\Spec\RelationBuilder;
 use LaravelJsonApi\Spec\ResourceBuilder;
 use LaravelJsonApi\Spec\Specification;
 use LaravelJsonApi\Spec\UnexpectedDocumentException;
 use LogicException;
 
-class Test extends TestCase
+class ResourceTest extends TestCase
 {
 
     /**
@@ -69,7 +65,7 @@ class Test extends TestCase
             'data:required' => [
                 new \stdClass(),
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member data is required.",
                     'status' => '400',
                     'source' => ['pointer' => '/'],
@@ -78,7 +74,7 @@ class Test extends TestCase
             'data:not object' => [
                 ['data' => []],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member data must be an object.",
                     'status' => '400',
                     'source' => ['pointer' => '/data'],
@@ -91,7 +87,7 @@ class Test extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member type is required.",
                     'status' => '400',
                     'source' => ['pointer' => '/data'],
@@ -105,7 +101,7 @@ class Test extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member type must be a string.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/type'],
@@ -119,7 +115,7 @@ class Test extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member type cannot be empty.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/type'],
@@ -162,7 +158,7 @@ class Test extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member attributes must be an object.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/attributes'],
@@ -178,7 +174,7 @@ class Test extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member attributes cannot have a type field.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/attributes'],
@@ -194,7 +190,7 @@ class Test extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member attributes cannot have a id field.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/attributes'],
@@ -212,7 +208,7 @@ class Test extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => 'The field foo is not a supported attribute.',
                     'status' => '400',
                     'source' => ['pointer' => '/data/attributes'],
@@ -231,7 +227,7 @@ class Test extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member relationships must be an object.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships'],
@@ -249,7 +245,7 @@ class Test extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member relationships cannot have a type field.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships'],
@@ -267,7 +263,7 @@ class Test extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member relationships cannot have a id field.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships'],
@@ -283,12 +279,12 @@ class Test extends TestCase
                             'slug' => 'hello-world',
                         ],
                         'relationships' => [
-                            'author' => [],
+                            'author' => false,
                         ],
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member author must be an object.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships/author'],
@@ -310,7 +306,7 @@ class Test extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => 'The field foo is not a supported relationship.',
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships'],
@@ -333,7 +329,7 @@ class Test extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member data is required.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships/author'],
@@ -356,7 +352,7 @@ class Test extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member data must be an object.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships/author/data'],
@@ -381,7 +377,7 @@ class Test extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member type is required.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships/author/data'],
@@ -406,7 +402,7 @@ class Test extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member id is required.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships/author/data'],
@@ -438,6 +434,57 @@ class Test extends TestCase
                     'source' => ['pointer' => '/data/relationships/author'],
                 ],
             ],
+            'data.relationships.*: rejected to-many for to-one' => [
+                [
+                    'data' => [
+                        'type' => 'posts',
+                        'attributes' => [
+                            'title' => 'Hello World',
+                            'content' => '...',
+                            'slug' => 'hello-world',
+                        ],
+                        'relationships' => [
+                            'author' => [
+                                'data' => [
+                                    [
+                                        'type' => 'users',
+                                        'id' => '123',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                [
+                    'title' => 'Non-Compliant JSON:API Document',
+                    'detail' => 'The field author must be a to-one relation.',
+                    'status' => '400',
+                    'source' => ['pointer' => '/data/relationships/author'],
+                ],
+            ],
+            'data.relationships.*.data.*:not array' => [
+                [
+                    'data' => [
+                        'type' => 'posts',
+                        'attributes' => [
+                            'title' => 'Hello World',
+                            'content' => '...',
+                            'slug' => 'hello-world',
+                        ],
+                        'relationships' => [
+                            'tags' => [
+                                'data' => false,
+                            ],
+                        ],
+                    ],
+                ],
+                [
+                    'title' => 'Non-Compliant JSON:API Document',
+                    'detail' => "The member data must be an array.",
+                    'status' => '400',
+                    'source' => ['pointer' => '/data/relationships/tags/data'],
+                ],
+            ],
             'data.relationships.*.data.*:not object' => [
                 [
                     'data' => [
@@ -457,7 +504,7 @@ class Test extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member 0 must be an object.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships/tags/data/0'],
@@ -487,7 +534,7 @@ class Test extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member type is required.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships/tags/data/0'],
@@ -517,7 +564,7 @@ class Test extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member id is required.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/relationships/tags/data/0'],
@@ -551,6 +598,32 @@ class Test extends TestCase
                     'source' => ['pointer' => '/data/relationships/tags/data/0'],
                 ],
             ],
+            'data.relationships.*: rejected to-one for to-many' => [
+                [
+                    'data' => [
+                        'type' => 'posts',
+                        'attributes' => [
+                            'title' => 'Hello World',
+                            'content' => '...',
+                            'slug' => 'hello-world',
+                        ],
+                        'relationships' => [
+                            'tags' => [
+                                'data' => [
+                                    'type' => 'tags',
+                                    'id' => '123',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                [
+                    'title' => 'Non-Compliant JSON:API Document',
+                    'detail' => 'The field tags must be a to-many relation.',
+                    'status' => '400',
+                    'source' => ['pointer' => '/data/relationships/tags'],
+                ],
+            ],
         ];
     }
 
@@ -568,7 +641,7 @@ class Test extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member id is required.",
                     'status' => '400',
                     'source' => ['pointer' => '/data'],
@@ -583,7 +656,7 @@ class Test extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member id must be a string.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/id'],
@@ -598,7 +671,7 @@ class Test extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member id must be a string.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/id'],
@@ -613,7 +686,7 @@ class Test extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Non-Compliant JSON API Document',
+                    'title' => 'Non-Compliant JSON:API Document',
                     'detail' => "The member id cannot be empty.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/id'],
@@ -632,361 +705,6 @@ class Test extends TestCase
                     'detail' => "Resource id 10 is not supported by this endpoint.",
                     'status' => '409',
                     'source' => ['pointer' => '/data/id'],
-                ],
-            ],
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function toOneProvider(): array
-    {
-        return [
-            'data:required' => [
-                new \stdClass(),
-                [
-                    'title' => 'Non-Compliant JSON API Document',
-                    'detail' => "The member data is required.",
-                    'status' => '400',
-                    'source' => ['pointer' => '/'],
-                ],
-            ],
-            'data:not object' => [
-                ['data' => false],
-                [
-                    'title' => 'Non-Compliant JSON API Document',
-                    'detail' => "The member data must be an object.",
-                    'status' => '400',
-                    'source' => ['pointer' => '/data'],
-                ],
-            ],
-            'data.type:required' => [
-                [
-                    'data' => [
-                        'id' => '1',
-                    ],
-                ],
-                [
-                    'title' => 'Non-Compliant JSON API Document',
-                    'detail' => "The member type is required.",
-                    'status' => '400',
-                    'source' => ['pointer' => '/data'],
-                ],
-            ],
-            'data.type:not string' => [
-                [
-                    'data' => [
-                        'type' => null,
-                        'id' => '1',
-                    ],
-                ],
-                [
-                    'title' => 'Non-Compliant JSON API Document',
-                    'detail' => "The member type must be a string.",
-                    'status' => '400',
-                    'source' => ['pointer' => '/data/type'],
-                ],
-            ],
-            'data.type:empty' => [
-                [
-                    'data' => [
-                        'type' => '',
-                        'id' => '1',
-                    ],
-                ],
-                [
-                    'title' => 'Non-Compliant JSON API Document',
-                    'detail' => "The member type cannot be empty.",
-                    'status' => '400',
-                    'source' => ['pointer' => '/data/type'],
-                ],
-            ],
-            'data.type:not recognised' => [
-                [
-                    'data' => [
-                        'type' => 'foobar',
-                        'id' => '1',
-                    ],
-                ],
-                [
-                    'title' => 'Not Supported',
-                    'detail' => "Resource type foobar is not recognised.",
-                    'status' => '400',
-                    'source' => ['pointer' => '/data/type'],
-                ],
-            ],
-            'data.id:required' => [
-                [
-                    'data' => [
-                        'type' => 'users',
-                    ],
-                ],
-                [
-                    'title' => 'Non-Compliant JSON API Document',
-                    'detail' => "The member id is required.",
-                    'status' => '400',
-                    'source' => ['pointer' => '/data'],
-                ],
-            ],
-            'data.id:not string' => [
-                [
-                    'data' => [
-                        'type' => 'users',
-                        'id' => null,
-                    ],
-                ],
-                [
-                    'title' => 'Non-Compliant JSON API Document',
-                    'detail' => "The member id must be a string.",
-                    'status' => '400',
-                    'source' => ['pointer' => '/data/id'],
-                ],
-            ],
-            'data.id:integer' => [
-                [
-                    'data' => [
-                        'type' => 'users',
-                        'id' => 1,
-                    ],
-                ],
-                [
-                    'title' => 'Non-Compliant JSON API Document',
-                    'detail' => "The member id must be a string.",
-                    'status' => '400',
-                    'source' => ['pointer' => '/data/id'],
-                ],
-            ],
-            'data.id:empty' => [
-                [
-                    'data' => [
-                        'type' => 'users',
-                        'id' => '',
-                    ],
-                ],
-                [
-                    'title' => 'Non-Compliant JSON API Document',
-                    'detail' => "The member id cannot be empty.",
-                    'status' => '400',
-                    'source' => ['pointer' => '/data/id'],
-                ],
-            ],
-            'data:does not exist' => [
-                [
-                    'data' => [
-                        'type' => 'users',
-                        'id' => '999',
-                    ],
-                ],
-                [
-                    'title' => 'Not Found',
-                    'detail' => 'The related resource does not exist.',
-                    'status' => '404',
-                    'source' => ['pointer' => '/data'],
-                ],
-            ],
-            'data:resource object with attributes' => [
-                [
-                    'data' => [
-                        'type' => 'users',
-                        'id' => '1',
-                        'attributes' => [
-                            'name' => 'John Doe',
-                        ],
-                    ],
-                ],
-                [
-                    'title' => 'Non-Compliant JSON API Document',
-                    'detail' => 'The member data must be a resource identifier.',
-                    'status' => '400',
-                    'source' => ['pointer' => '/data'],
-                ],
-            ],
-            'data:resource object with relationships' => [
-                [
-                    'data' => [
-                        'type' => 'users',
-                        'id' => '1',
-                        'relationships' => [
-                            'sites' => [
-                                'data' => [],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'title' => 'Non-Compliant JSON API Document',
-                    'detail' => 'The member data must be a resource identifier.',
-                    'status' => '400',
-                    'source' => ['pointer' => '/data'],
-                ],
-            ],
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function toManyProvider(): array
-    {
-        return [
-            'data:required' => [
-                new \stdClass(),
-                [
-                    'title' => 'Non-Compliant JSON API Document',
-                    'detail' => "The member data is required.",
-                    'status' => '400',
-                    'source' => ['pointer' => '/'],
-                ],
-            ],
-            'data:to-one' => [
-                [
-                    'data' => [
-                        'type' => 'posts',
-                        'id' => '123',
-                    ],
-                ],
-                [
-                    'title' => 'Non-Compliant JSON API Document',
-                    'detail' => "The member data must be an array.",
-                    'status' => '400',
-                    'source' => ['pointer' => '/data'],
-                ],
-            ],
-            'data.type:required' => [
-                [
-                    'data' => [
-                        ['id' => '1'],
-                    ],
-                ],
-                [
-                    'title' => 'Non-Compliant JSON API Document',
-                    'detail' => "The member type is required.",
-                    'status' => '400',
-                    'source' => ['pointer' => '/data/0'],
-                ],
-            ],
-            'data.type:not string' => [
-                [
-                    'data' => [
-                        ['type' => null, 'id' => '1'],
-                    ],
-                ],
-                [
-                    'title' => 'Non-Compliant JSON API Document',
-                    'detail' => "The member type must be a string.",
-                    'status' => '400',
-                    'source' => ['pointer' => '/data/0/type'],
-                ],
-            ],
-            'data.type:empty' => [
-                [
-                    'data' => [
-                        ['type' => '', 'id' => '1'],
-                    ],
-                ],
-                [
-                    'title' => 'Non-Compliant JSON API Document',
-                    'detail' => "The member type cannot be empty.",
-                    'status' => '400',
-                    'source' => ['pointer' => '/data/0/type'],
-                ],
-            ],
-            'data.type:not recognised' => [
-                [
-                    'data' => [
-                        ['type' => 'foobar', 'id' => '1'],
-                    ],
-                ],
-                [
-                    'title' => 'Not Supported',
-                    'detail' => "Resource type foobar is not recognised.",
-                    'status' => '400',
-                    'source' => ['pointer' => '/data/0/type'],
-                ],
-            ],
-            'data.id:required' => [
-                [
-                    'data' => [
-                        ['type' => 'tags'],
-                    ],
-                ],
-                [
-                    'title' => 'Non-Compliant JSON API Document',
-                    'detail' => "The member id is required.",
-                    'status' => '400',
-                    'source' => ['pointer' => '/data/0'],
-                ],
-            ],
-            'data.id:not string' => [
-                [
-                    'data' => [
-                        ['type' => 'tags', 'id' => null],
-                    ],
-                ],
-                [
-                    'title' => 'Non-Compliant JSON API Document',
-                    'detail' => "The member id must be a string.",
-                    'status' => '400',
-                    'source' => ['pointer' => '/data/0/id'],
-                ],
-            ],
-            'data.id:integer' => [
-                [
-                    'data' => [
-                        ['type' => 'tags', 'id' => 1],
-                    ],
-                ],
-                [
-                    'title' => 'Non-Compliant JSON API Document',
-                    'detail' => "The member id must be a string.",
-                    'status' => '400',
-                    'source' => ['pointer' => '/data/0/id'],
-                ],
-            ],
-            'data.id:empty' => [
-                [
-                    'data' => [
-                        ['type' => 'tags', 'id' => ''],
-                    ],
-                ],
-                [
-                    'title' => 'Non-Compliant JSON API Document',
-                    'detail' => "The member id cannot be empty.",
-                    'status' => '400',
-                    'source' => ['pointer' => '/data/0/id'],
-                ],
-            ],
-            'data:does not exist' => [
-                [
-                    'data' => [
-                        ['type' => 'tags', 'id' => '999'],
-                    ],
-                ],
-                [
-                    'title' => 'Not Found',
-                    'detail' => 'The related resource does not exist.',
-                    'status' => '404',
-                    'source' => ['pointer' => '/data/0'],
-                ],
-            ],
-            'data:resource object with attributes' => [
-                [
-                    'data' => [
-                        [
-                            'type' => 'tags',
-                            'id' => '100',
-                            'attributes' => [
-                                'name' => 'News',
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'title' => 'Non-Compliant JSON API Document',
-                    'detail' => 'The member 0 must be a resource identifier.',
-                    'status' => '400',
-                    'source' => ['pointer' => '/data/0'],
                 ],
             ],
         ];
@@ -1168,13 +886,13 @@ class Test extends TestCase
                 'detail' => 'The author field cannot exist as an attribute and a relationship.',
                 'source' => ['pointer' => '/data'],
                 'status' => '400',
-                'title' => 'Non-Compliant JSON API Document',
+                'title' => 'Non-Compliant JSON:API Document',
             ],
             [
                 'detail' => 'The field author is not a supported attribute.',
                 'source' => ['pointer' => '/data/attributes'],
                 'status' => '400',
-                'title' => 'Non-Compliant JSON API Document',
+                'title' => 'Non-Compliant JSON:API Document',
             ],
         ];
 
@@ -1188,92 +906,4 @@ class Test extends TestCase
         $this->assertInvalid($document, $expected);
     }
 
-    /**
-     * @param $json
-     * @param array $expected
-     * @dataProvider toOneProvider
-     */
-    public function testToOne($json, array $expected): void
-    {
-        ksort($expected);
-
-        /** @var RelationBuilder $builder */
-        $builder = $this->app->make(RelationBuilder::class);
-
-        $document = $builder
-            ->expects('posts', 'author')
-            ->build(json_encode($json));
-
-        $this->assertInvalid($document, [$expected]);
-    }
-
-    /**
-     * @param $json
-     * @param array $expected
-     * @dataProvider toManyProvider
-     */
-    public function testToMany($json, array $expected): void
-    {
-        ksort($expected);
-
-        /** @var RelationBuilder $builder */
-        $builder = $this->app->make(RelationBuilder::class);
-
-        $document = $builder
-            ->expects('posts', 'tags')
-            ->build(json_encode($json));
-
-        $this->assertInvalid($document, [$expected]);
-    }
-
-    /**
-     * @param Document $document
-     * @param array $expected
-     */
-    private function assertInvalid(Document $document, array $expected): void
-    {
-        $this->assertFalse($document->valid());
-        $this->assertTrue($document->invalid());
-        $this->assertSame($expected, $document->errors()->toArray());
-    }
-
-    /**
-     * @param string $name
-     * @return Attribute
-     */
-    private function createAttribute(string $name): Attribute
-    {
-        $attr = $this->createMock(Attribute::class);
-        $attr->method('name')->willReturn($name);
-
-        return $attr;
-    }
-
-    /**
-     * @param string $name
-     * @return Relation
-     */
-    private function createToOne(string $name): Relation
-    {
-        $relation = $this->createMock(Relation::class);
-        $relation->method('name')->willReturn($name);
-        $relation->method('toOne')->willReturn(true);
-        $relation->method('toMany')->willReturn(false);
-
-        return $relation;
-    }
-
-    /**
-     * @param string $name
-     * @return Relation
-     */
-    private function createToMany(string $name): Relation
-    {
-        $relation = $this->createMock(Relation::class);
-        $relation->method('name')->willReturn($name);
-        $relation->method('toOne')->willReturn(false);
-        $relation->method('toMany')->willReturn(true);
-
-        return $relation;
-    }
 }
