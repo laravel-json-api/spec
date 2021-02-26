@@ -133,10 +133,10 @@ class ToOneTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Not Supported',
-                    'detail' => "Resource type posts is not supported.",
-                    'status' => '400',
-                    'source' => ['pointer' => '/data/type'],
+                    'title' => 'Unprocessable Entity',
+                    'detail' => 'The author field must be a to-one relationship containing users resources.',
+                    'status' => '422',
+                    'source' => ['pointer' => '/data'],
                 ],
             ],
             'data.id:required' => [

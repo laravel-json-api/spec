@@ -20,6 +20,8 @@ declare(strict_types=1);
 namespace LaravelJsonApi\Spec;
 
 use Illuminate\Contracts\Translation\Translator as IlluminateTranslator;
+use LaravelJsonApi\Contracts\Schema\PolymorphicRelation;
+use LaravelJsonApi\Contracts\Schema\Relation;
 use LaravelJsonApi\Core\Document\Error;
 use LaravelJsonApi\Core\Support\Str;
 
@@ -239,18 +241,28 @@ class Translator
     /**
      * Create an error for when the resource type is not supported by a relationship.
      *
-     * @param string $type
+     * @param Relation $relation
      * @param string $path
      * @return Error
      */
-    public function resourceTypeNotSupportedByRelationship(string $type, string $path = '/data'): Error
+    public function resourceTypeNotSupportedByRelationship(Relation $relation, string $path = '/data'): Error
     {
+        $key = sprintf(
+            'resource_type_not_supported_by_%s_relationship',
+            $relation->toOne() ? 'to_one' : 'to_many',
+        );
+
+        $data = [
+            'field' => $relation->name(),
+            'types' => implode(', ', $relation->allInverse()),
+        ];
+
         return Error::make()
-            ->setStatus(400)
-            ->setCode($this->trans('resource_type_not_supported_by_relationship', 'code'))
-            ->setTitle($this->trans('resource_type_not_supported_by_relationship', 'title'))
-            ->setDetail($this->trans('resource_type_not_supported_by_relationship', 'detail', compact('type')))
-            ->setSourcePointer($this->pointer($path, 'type'));
+            ->setStatus(422)
+            ->setCode($this->trans($key, 'code'))
+            ->setTitle($this->trans($key, 'title'))
+            ->setDetail($this->trans($key, 'detail', $data))
+            ->setSourcePointer($this->pointer($path));
     }
 
     /**

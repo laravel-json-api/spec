@@ -55,13 +55,13 @@ class Factory
      *
      * @param string $path
      * @param $value
-     * @param array|null $expected
-     *      the expected resource types.
+     * @param Relation|null $relation
+     *      the relation the identifier exists in.
      * @return Identifier
      */
-    public function createIdentifierValue(string $path, $value, array $expected = null): Identifier
+    public function createIdentifierValue(string $path, $value, Relation $relation = null): Identifier
     {
-        return new Identifier($this->spec, $this->translator, $path, $value, $expected);
+        return new Identifier($this->spec, $this->translator, $path, $value, $relation);
     }
 
     /**

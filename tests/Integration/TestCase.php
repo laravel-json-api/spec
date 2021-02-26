@@ -69,6 +69,7 @@ class TestCase extends BaseTestCase
         $relation = $this->createMock(Relation::class);
         $relation->method('name')->willReturn($name);
         $relation->method('inverse')->willReturn($inverse);
+        $relation->method('allInverse')->willReturn([$inverse]);
         $relation->method('toOne')->willReturn(true);
         $relation->method('toMany')->willReturn(false);
 
@@ -85,6 +86,7 @@ class TestCase extends BaseTestCase
         $relation = $this->createMock(Relation::class);
         $relation->method('name')->willReturn($name);
         $relation->method('inverse')->willReturn($inverse);
+        $relation->method('allInverse')->willReturn([$inverse]);
         $relation->method('toOne')->willReturn(false);
         $relation->method('toMany')->willReturn(true);
 

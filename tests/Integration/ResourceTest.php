@@ -454,10 +454,10 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Not Supported',
-                    'detail' => 'Resource type posts is not supported.',
-                    'status' => '400',
-                    'source' => ['pointer' => '/data/relationships/author/data/type'],
+                    'title' => 'Unprocessable Entity',
+                    'detail' => 'The author field must be a to-one relationship containing users resources.',
+                    'status' => '422',
+                    'source' => ['pointer' => '/data/relationships/author'],
                 ],
             ],
             'data.relationships.*: rejected to-many for to-one' => [
@@ -646,10 +646,10 @@ class ResourceTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Not Supported',
-                    'detail' => 'Resource type posts is not supported.',
-                    'status' => '400',
-                    'source' => ['pointer' => '/data/relationships/tags/data/0/type'],
+                    'title' => 'Unprocessable Entity',
+                    'detail' => 'The tags field must be a to-many relationship containing tags resources.',
+                    'status' => '422',
+                    'source' => ['pointer' => '/data/relationships/tags/data/0'],
                 ],
             ],
             'data.relationships.*: rejected to-one for to-many' => [

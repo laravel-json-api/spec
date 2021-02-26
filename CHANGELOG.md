@@ -13,8 +13,8 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Changed
 
-- **BREAKING** The `ToOne` and `ToMany` value objects now expect the relation object instead of the string name of the
-  relation. This affects both their constructors and the methods on the factory to create them.
+- **BREAKING** The `ToOne`, `ToMany` and `Identifier` value objects now expect the relation object to be passed into
+  their constructor. This also affects the methods on the factory to create them.
 
 ## [1.0.0-alpha.3] - 2021-02-09
 

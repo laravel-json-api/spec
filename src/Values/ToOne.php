@@ -19,7 +19,6 @@ declare(strict_types=1);
 
 namespace LaravelJsonApi\Spec\Values;
 
-use LaravelJsonApi\Contracts\Schema\PolymorphicRelation;
 use LaravelJsonApi\Contracts\Schema\Relation;
 use LaravelJsonApi\Core\Document\ErrorList;
 use LaravelJsonApi\Spec\Factory;
@@ -90,7 +89,7 @@ class ToOne extends Value
             return $this->data = !is_null($this->value->data) ? $this->factory->createIdentifierValue(
                 "{$this->path}/data",
                 $this->value->data,
-                $this->expected(),
+                $this->relation,
             ) : null;
         }
 
@@ -142,20 +141,6 @@ class ToOne extends Value
         }
 
         return $errors;
-    }
-
-    /**
-     * Get the expected resource types.
-     *
-     * @return array
-     */
-    private function expected(): array
-    {
-        if ($this->relation instanceof PolymorphicRelation) {
-            return $this->relation->inverseTypes();
-        }
-
-        return [$this->relation->inverse()];
     }
 
 }

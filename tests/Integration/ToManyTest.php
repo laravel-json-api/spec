@@ -132,10 +132,10 @@ class ToManyTest extends TestCase
                     ],
                 ],
                 [
-                    'title' => 'Not Supported',
-                    'detail' => "Resource type posts is not supported.",
-                    'status' => '400',
-                    'source' => ['pointer' => '/data/0/type'],
+                    'title' => 'Unprocessable Entity',
+                    'detail' => 'The tags field must be a to-many relationship containing tags resources.',
+                    'status' => '422',
+                    'source' => ['pointer' => '/data/0'],
                 ],
             ],
             'data.type:not recognised' => [

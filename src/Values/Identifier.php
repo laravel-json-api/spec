@@ -20,6 +20,7 @@ declare(strict_types=1);
 namespace LaravelJsonApi\Spec\Values;
 
 use Illuminate\Support\Str;
+use LaravelJsonApi\Contracts\Schema\Relation;
 use LaravelJsonApi\Core\Document\Error;
 use LaravelJsonApi\Core\Document\ErrorList;
 use LaravelJsonApi\Spec\Specification;
@@ -45,9 +46,9 @@ class Identifier extends Value
     private $value;
 
     /**
-     * @var array|null
+     * @var Relation|null
      */
-    private ?array $expected;
+    private ?Relation $relation = null;
 
     /**
      * Identifier constructor.
@@ -56,20 +57,21 @@ class Identifier extends Value
      * @param Translator $translator
      * @param string $path
      * @param mixed $value
-     * @param array|null $expected
+     * @param Relation|null $relation
+     *      the relation the identifier is in.
      */
     public function __construct(
         Specification $spec,
         Translator $translator,
         string $path,
         $value,
-        array $expected = null
+        Relation $relation = null
     ) {
         $this->spec = $spec;
         $this->translator = $translator;
         $this->path = $path;
         $this->value = $value;
-        $this->expected = $expected;
+        $this->relation = $relation;
     }
 
     /**
@@ -125,16 +127,16 @@ class Identifier extends Value
             ));
         }
 
-        if ($errors->isEmpty() && !$this->spec->exists($this->value->type, $this->value->id)) {
-            $errors->push($this->translator->resourceDoesNotExist(
-                $this->doesNotExist()
-            ));
+        if ($errors->isEmpty() && $error = $this->validateTypeAndId()) {
+            $errors->push($error);
         }
 
         return $errors;
     }
 
     /**
+     * Validate just the type member.
+     *
      * @return Error|null
      */
     private function validateType(): ?Error
@@ -167,17 +169,12 @@ class Identifier extends Value
             );
         }
 
-        if (is_array($this->expected) && !in_array($this->value->type, $this->expected, true)) {
-            return $this->translator->resourceTypeNotSupportedByRelationship(
-                $this->value->type,
-                $this->path,
-            );
-        }
-
         return null;
     }
 
     /**
+     * Validate just the id member.
+     *
      * @return Error|null
      */
     private function validateId(): ?Error
@@ -209,6 +206,29 @@ class Identifier extends Value
     }
 
     /**
+     * Validations to run when both the type and id are separately valid.
+     *
+     * @return Error|null
+     */
+    private function validateTypeAndId(): ?Error
+    {
+        if ($this->relation && !in_array($this->value->type, $this->relation->allInverse(), true)) {
+            return $this->translator->resourceTypeNotSupportedByRelationship(
+                $this->relation,
+                $this->pathForTypeAndId(),
+            );
+        }
+
+        if (!$this->spec->exists($this->value->type, $this->value->id)) {
+            return $this->translator->resourceDoesNotExist(
+                $this->pathForTypeAndId(),
+            );
+        }
+
+        return null;
+    }
+
+    /**
      * Is the identifier in a list of identifiers?
      *
      * @return bool
@@ -231,7 +251,7 @@ class Identifier extends Value
      *
      * @return string
      */
-    private function doesNotExist(): string
+    private function pathForTypeAndId(): string
     {
         if ($this->inList()) {
             return $this->path;
@@ -243,4 +263,5 @@ class Identifier extends Value
 
         return $this->path;
     }
+
 }

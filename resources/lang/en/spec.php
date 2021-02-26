@@ -100,9 +100,15 @@ return [
         'code' => '',
     ],
 
-    'resource_type_not_supported_by_relationship' => [
-        'title' => 'Not Supported',
-        'detail' => 'Resource type :type is not supported.',
+    'resource_type_not_supported_by_to_one_relationship' => [
+        'title' => 'Unprocessable Entity',
+        'detail' => 'The :field field must be a to-one relationship containing :types resources.',
+        'code' => '',
+    ],
+
+    'resource_type_not_supported_by_to_many_relationship' => [
+        'title' => 'Unprocessable Entity',
+        'detail' => 'The :field field must be a to-many relationship containing :types resources.',
         'code' => '',
     ],
 

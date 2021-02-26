@@ -19,7 +19,6 @@ declare(strict_types=1);
 
 namespace LaravelJsonApi\Spec\Values;
 
-use LaravelJsonApi\Contracts\Schema\PolymorphicRelation;
 use LaravelJsonApi\Contracts\Schema\Relation;
 use LaravelJsonApi\Core\Document\ErrorList;
 use LaravelJsonApi\Spec\Factory;
@@ -86,7 +85,7 @@ class ToMany extends Value
                 return $this->factory->createIdentifierValue(
                     "{$this->path}/data/{$idx}",
                     $value,
-                    $this->expected(),
+                    $this->relation,
                 );
             })->all();
         }
@@ -146,20 +145,6 @@ class ToMany extends Value
         }
 
         return $errors;
-    }
-
-    /**
-     * Get the expected resource types.
-     *
-     * @return array
-     */
-    private function expected(): array
-    {
-        if ($this->relation instanceof PolymorphicRelation) {
-            return $this->relation->inverseTypes();
-        }
-
-        return [$this->relation->inverse()];
     }
 
 }
