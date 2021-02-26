@@ -43,8 +43,8 @@ class ResourceTest extends TestCase
                 $this->createAttribute('title'),
                 $this->createAttribute('content'),
                 $this->createAttribute('slug'),
-                $this->createToOne('author'),
-                $this->createToMany('tags'),
+                $this->createToOne('author', 'users'),
+                $this->createToMany('tags', 'tags'),
             ]],
             ['users', [
                 $this->createAttribute('name'),
@@ -434,6 +434,32 @@ class ResourceTest extends TestCase
                     'source' => ['pointer' => '/data/relationships/author'],
                 ],
             ],
+            'data.relationships.*.data:resource not supported' => [
+                [
+                    'data' => [
+                        'type' => 'posts',
+                        'attributes' => [
+                            'title' => 'Hello World',
+                            'content' => '...',
+                            'slug' => 'hello-world',
+                        ],
+                        'relationships' => [
+                            'author' => [
+                                'data' => [
+                                    'type' => 'posts',
+                                    'id' => '1',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                [
+                    'title' => 'Not Supported',
+                    'detail' => 'Resource type posts is not supported.',
+                    'status' => '400',
+                    'source' => ['pointer' => '/data/relationships/author/data/type'],
+                ],
+            ],
             'data.relationships.*: rejected to-many for to-one' => [
                 [
                     'data' => [
@@ -596,6 +622,34 @@ class ResourceTest extends TestCase
                     'detail' => 'The related resource does not exist.',
                     'status' => '404',
                     'source' => ['pointer' => '/data/relationships/tags/data/0'],
+                ],
+            ],
+            'data.relationships.*.data.*:resource not supported' => [
+                [
+                    'data' => [
+                        'type' => 'posts',
+                        'attributes' => [
+                            'title' => 'Hello World',
+                            'content' => '...',
+                            'slug' => 'hello-world',
+                        ],
+                        'relationships' => [
+                            'tags' => [
+                                'data' => [
+                                    [
+                                        'type' => 'posts',
+                                        'id' => '1',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                [
+                    'title' => 'Not Supported',
+                    'detail' => 'Resource type posts is not supported.',
+                    'status' => '400',
+                    'source' => ['pointer' => '/data/relationships/tags/data/0/type'],
                 ],
             ],
             'data.relationships.*: rejected to-one for to-many' => [

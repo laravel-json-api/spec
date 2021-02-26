@@ -123,14 +123,14 @@ class RelationshipsValidator
     {
         if ($relation->toMany()) {
             return $this->factory->createToManyValue(
-                $relation->name(),
+                $relation,
                 "/data/relationships/{$relation->name()}",
                 $value
             )->allErrors();
         }
 
         return $this->factory->createToOneValue(
-            $relation->name(),
+            $relation,
             "/data/relationships/{$relation->name()}",
             $value
         )->allErrors();

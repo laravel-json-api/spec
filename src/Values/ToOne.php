@@ -19,6 +19,8 @@ declare(strict_types=1);
 
 namespace LaravelJsonApi\Spec\Values;
 
+use LaravelJsonApi\Contracts\Schema\PolymorphicRelation;
+use LaravelJsonApi\Contracts\Schema\Relation;
 use LaravelJsonApi\Core\Document\ErrorList;
 use LaravelJsonApi\Spec\Factory;
 use LaravelJsonApi\Spec\Translator;
@@ -38,9 +40,9 @@ class ToOne extends Value
     private Factory $factory;
 
     /**
-     * @var string
+     * @var Relation
      */
-    private string $name;
+    private Relation $relation;
 
     /**
      * @var mixed
@@ -57,20 +59,20 @@ class ToOne extends Value
      *
      * @param Translator $translator
      * @param Factory $factory
-     * @param string $name
+     * @param Relation $relation
      * @param string $path
      * @param mixed $value
      */
     public function __construct(
         Translator $translator,
         Factory $factory,
-        string $name,
+        Relation $relation,
         string $path,
         $value
     ) {
         $this->translator = $translator;
         $this->factory = $factory;
-        $this->name = $name;
+        $this->relation = $relation;
         $this->path = rtrim($path, '/');
         $this->value = $value;
     }
@@ -87,7 +89,8 @@ class ToOne extends Value
         if ($this->valid()) {
             return $this->data = !is_null($this->value->data) ? $this->factory->createIdentifierValue(
                 "{$this->path}/data",
-                $this->value->data
+                $this->value->data,
+                $this->expected(),
             ) : null;
         }
 
@@ -134,11 +137,25 @@ class ToOne extends Value
             return $errors->push($this->translator->fieldExpectsToOne(
                 $this->parent(),
                 $this->member() ?: 'data',
-                $this->name
+                $this->relation->name()
             ));
         }
 
         return $errors;
+    }
+
+    /**
+     * Get the expected resource types.
+     *
+     * @return array
+     */
+    private function expected(): array
+    {
+        if ($this->relation instanceof PolymorphicRelation) {
+            return $this->relation->inverseTypes();
+        }
+
+        return [$this->relation->inverse()];
     }
 
 }

@@ -8,6 +8,13 @@ All notable changes to this project will be documented in this file. This projec
 ### Added
 
 - Decoding JSON document now rejects an empty string with a specific exception message indicating that JSON is expected.
+- Sending an incorrect resource type for a relationship is now rejected. For example, if a relation expects `tags` but
+  the client provides `posts`, it will be rejected with a message that `posts` are not supported.
+
+### Changed
+
+- **BREAKING** The `ToOne` and `ToMany` value objects now expect the relation object instead of the string name of the
+  relation. This affects both their constructors and the methods on the factory to create them.
 
 ## [1.0.0-alpha.3] - 2021-02-09
 

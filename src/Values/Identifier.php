@@ -45,19 +45,31 @@ class Identifier extends Value
     private $value;
 
     /**
+     * @var array|null
+     */
+    private ?array $expected;
+
+    /**
      * Identifier constructor.
      *
      * @param Specification $spec
      * @param Translator $translator
      * @param string $path
      * @param mixed $value
+     * @param array|null $expected
      */
-    public function __construct(Specification $spec, Translator $translator, string $path, $value)
-    {
+    public function __construct(
+        Specification $spec,
+        Translator $translator,
+        string $path,
+        $value,
+        array $expected = null
+    ) {
         $this->spec = $spec;
         $this->translator = $translator;
         $this->path = $path;
         $this->value = $value;
+        $this->expected = $expected;
     }
 
     /**
@@ -152,6 +164,13 @@ class Identifier extends Value
             return $this->translator->resourceTypeNotRecognised(
                 $this->value->type,
                 $this->path
+            );
+        }
+
+        if (is_array($this->expected) && !in_array($this->value->type, $this->expected, true)) {
+            return $this->translator->resourceTypeNotSupportedByRelationship(
+                $this->value->type,
+                $this->path,
             );
         }
 

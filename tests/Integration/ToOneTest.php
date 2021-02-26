@@ -37,7 +37,7 @@ class ToOneTest extends TestCase
         $spec->method('exists')->willReturnCallback(fn($type, $id) => '999' !== $id);
         $spec->method('fields')->willReturnMap([
             ['posts', [
-                $this->createToOne('author'),
+                $this->createToOne('author', 'users'),
             ]],
             ['users', [
                 $this->createAttribute('name'),
@@ -121,6 +121,20 @@ class ToOneTest extends TestCase
                 [
                     'title' => 'Not Supported',
                     'detail' => "Resource type foobar is not recognised.",
+                    'status' => '400',
+                    'source' => ['pointer' => '/data/type'],
+                ],
+            ],
+            'data.type:not supported' => [
+                [
+                    'data' => [
+                        'type' => 'posts',
+                        'id' => '1',
+                    ],
+                ],
+                [
+                    'title' => 'Not Supported',
+                    'detail' => "Resource type posts is not supported.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/type'],
                 ],

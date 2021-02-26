@@ -106,6 +106,12 @@ return [
         'code' => '',
     ],
 
+    'resource_type_not_supported_by_relationship' => [
+        'title' => 'Niet Ondersteund',
+        'detail' => 'Resource type :type wordt niet ondersteund.',
+        'code' => '',
+    ],
+
     'resource_type_not_recognised' => [
         'title' => 'Niet Ondersteund',
         'detail' => 'Resource type :type wordt niet herkend.',

@@ -100,6 +100,12 @@ return [
         'code' => '',
     ],
 
+    'resource_type_not_supported_by_relationship' => [
+        'title' => 'Non supporté',
+        'detail' => "Le type de ressource :type n'est pas supporté.",
+        'code' => '',
+    ],
+
     'resource_type_not_recognised' => [
         'title' => 'Non supporté',
         'detail' => "Le type de ressource :type n'est pas reconnu.",

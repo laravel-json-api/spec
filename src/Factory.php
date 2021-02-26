@@ -19,6 +19,7 @@ declare(strict_types=1);
 
 namespace LaravelJsonApi\Spec;
 
+use LaravelJsonApi\Contracts\Schema\Relation;
 use LaravelJsonApi\Spec\Values\Identifier;
 use LaravelJsonApi\Spec\Values\ToMany;
 use LaravelJsonApi\Spec\Values\ToOne;
@@ -54,36 +55,38 @@ class Factory
      *
      * @param string $path
      * @param $value
+     * @param array|null $expected
+     *      the expected resource types.
      * @return Identifier
      */
-    public function createIdentifierValue(string $path, $value): Identifier
+    public function createIdentifierValue(string $path, $value, array $expected = null): Identifier
     {
-        return new Identifier($this->spec, $this->translator, $path, $value);
+        return new Identifier($this->spec, $this->translator, $path, $value, $expected);
     }
 
     /**
      * Create a to-one relationship object.
      *
-     * @param string $name
+     * @param Relation $relation
      * @param string $path
      * @param $value
      * @return ToOne
      */
-    public function createToOneValue(string $name, string $path, $value): ToOne
+    public function createToOneValue(Relation $relation, string $path, $value): ToOne
     {
-        return new ToOne($this->translator, $this, $name, $path, $value);
+        return new ToOne($this->translator, $this, $relation, $path, $value);
     }
 
     /**
      * Create a to-many relationship object.
      *
-     * @param string $name
+     * @param Relation $relation
      * @param string $path
      * @param $value
      * @return ToMany
      */
-    public function createToManyValue(string $name, string $path, $value): ToMany
+    public function createToManyValue(Relation $relation, string $path, $value): ToMany
     {
-        return new ToMany($this->translator, $this, $name, $path, $value);
+        return new ToMany($this->translator, $this, $relation, $path, $value);
     }
 }
