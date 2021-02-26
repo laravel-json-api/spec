@@ -710,6 +710,32 @@ class ResourceTest extends TestCase
         ];
     }
 
+    /**
+     * @return array
+     */
+    public function emptyStringProvider(): array
+    {
+        return [
+            [''],
+            ['           '],
+        ];
+    }
+
+    /**
+     * @param string $value
+     * @dataProvider emptyStringProvider
+     */
+    public function testEmptyString(string $value): void
+    {
+        $this->expectException(UnexpectedDocumentException::class);
+        $this->expectExceptionMessage('Expecting JSON to decode.');
+
+        /** @var ResourceBuilder $builder */
+        $builder = $this->app->make(ResourceBuilder::class);
+
+        $builder->expects('posts', '1')->build($value);
+    }
+
     public function testInvalidJson(): void
     {
         /** @var ResourceBuilder $builder */
@@ -751,6 +777,7 @@ class ResourceTest extends TestCase
     public function testNonObject(string $json): void
     {
         $this->expectException(UnexpectedDocumentException::class);
+        $this->expectExceptionMessage('Expecting JSON to decode to an object.');
 
         /** @var ResourceBuilder $builder */
         $builder = $this->app->make(ResourceBuilder::class);
