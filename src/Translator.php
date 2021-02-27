@@ -20,7 +20,6 @@ declare(strict_types=1);
 namespace LaravelJsonApi\Spec;
 
 use Illuminate\Contracts\Translation\Translator as IlluminateTranslator;
-use LaravelJsonApi\Contracts\Schema\PolymorphicRelation;
 use LaravelJsonApi\Contracts\Schema\Relation;
 use LaravelJsonApi\Core\Document\Error;
 use LaravelJsonApi\Core\Support\Str;
