@@ -37,7 +37,7 @@ class ToManyTest extends TestCase
         $spec->method('exists')->willReturnCallback(fn($type, $id) => '999' !== $id);
         $spec->method('fields')->willReturnMap([
             ['posts', [
-                $this->createToMany('tags'),
+                $this->createToMany('tags', 'tags'),
             ]],
             ['tags', [
                 $this->createAttribute('name'),
@@ -123,6 +123,19 @@ class ToManyTest extends TestCase
                     'detail' => "The member type cannot be empty.",
                     'status' => '400',
                     'source' => ['pointer' => '/data/0/type'],
+                ],
+            ],
+            'data.type:not supported' => [
+                [
+                    'data' => [
+                        ['type' => 'posts', 'id' => '1'],
+                    ],
+                ],
+                [
+                    'title' => 'Unprocessable Entity',
+                    'detail' => 'The tags field must be a to-many relationship containing tags resources.',
+                    'status' => '422',
+                    'source' => ['pointer' => '/data/0'],
                 ],
             ],
             'data.type:not recognised' => [

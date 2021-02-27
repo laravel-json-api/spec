@@ -43,8 +43,8 @@ class ResourceTest extends TestCase
                 $this->createAttribute('title'),
                 $this->createAttribute('content'),
                 $this->createAttribute('slug'),
-                $this->createToOne('author'),
-                $this->createToMany('tags'),
+                $this->createToOne('author', 'users'),
+                $this->createToMany('tags', 'tags'),
             ]],
             ['users', [
                 $this->createAttribute('name'),
@@ -434,6 +434,32 @@ class ResourceTest extends TestCase
                     'source' => ['pointer' => '/data/relationships/author'],
                 ],
             ],
+            'data.relationships.*.data:resource not supported' => [
+                [
+                    'data' => [
+                        'type' => 'posts',
+                        'attributes' => [
+                            'title' => 'Hello World',
+                            'content' => '...',
+                            'slug' => 'hello-world',
+                        ],
+                        'relationships' => [
+                            'author' => [
+                                'data' => [
+                                    'type' => 'posts',
+                                    'id' => '1',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                [
+                    'title' => 'Unprocessable Entity',
+                    'detail' => 'The author field must be a to-one relationship containing users resources.',
+                    'status' => '422',
+                    'source' => ['pointer' => '/data/relationships/author'],
+                ],
+            ],
             'data.relationships.*: rejected to-many for to-one' => [
                 [
                     'data' => [
@@ -598,6 +624,34 @@ class ResourceTest extends TestCase
                     'source' => ['pointer' => '/data/relationships/tags/data/0'],
                 ],
             ],
+            'data.relationships.*.data.*:resource not supported' => [
+                [
+                    'data' => [
+                        'type' => 'posts',
+                        'attributes' => [
+                            'title' => 'Hello World',
+                            'content' => '...',
+                            'slug' => 'hello-world',
+                        ],
+                        'relationships' => [
+                            'tags' => [
+                                'data' => [
+                                    [
+                                        'type' => 'posts',
+                                        'id' => '1',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                [
+                    'title' => 'Unprocessable Entity',
+                    'detail' => 'The tags field must be a to-many relationship containing tags resources.',
+                    'status' => '422',
+                    'source' => ['pointer' => '/data/relationships/tags/data/0'],
+                ],
+            ],
             'data.relationships.*: rejected to-one for to-many' => [
                 [
                     'data' => [
@@ -710,6 +764,32 @@ class ResourceTest extends TestCase
         ];
     }
 
+    /**
+     * @return array
+     */
+    public function emptyStringProvider(): array
+    {
+        return [
+            [''],
+            ['           '],
+        ];
+    }
+
+    /**
+     * @param string $value
+     * @dataProvider emptyStringProvider
+     */
+    public function testEmptyString(string $value): void
+    {
+        $this->expectException(UnexpectedDocumentException::class);
+        $this->expectExceptionMessage('Expecting JSON to decode.');
+
+        /** @var ResourceBuilder $builder */
+        $builder = $this->app->make(ResourceBuilder::class);
+
+        $builder->expects('posts', '1')->build($value);
+    }
+
     public function testInvalidJson(): void
     {
         /** @var ResourceBuilder $builder */
@@ -751,6 +831,7 @@ class ResourceTest extends TestCase
     public function testNonObject(string $json): void
     {
         $this->expectException(UnexpectedDocumentException::class);
+        $this->expectExceptionMessage('Expecting JSON to decode to an object.');
 
         /** @var ResourceBuilder $builder */
         $builder = $this->app->make(ResourceBuilder::class);

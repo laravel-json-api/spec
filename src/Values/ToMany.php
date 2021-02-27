@@ -19,6 +19,7 @@ declare(strict_types=1);
 
 namespace LaravelJsonApi\Spec\Values;
 
+use LaravelJsonApi\Contracts\Schema\Relation;
 use LaravelJsonApi\Core\Document\ErrorList;
 use LaravelJsonApi\Spec\Factory;
 use LaravelJsonApi\Spec\Translator;
@@ -38,9 +39,9 @@ class ToMany extends Value
     private Factory $factory;
 
     /**
-     * @var string
+     * @var Relation
      */
-    private string $name;
+    private Relation $relation;
 
     /**
      * @var mixed
@@ -57,15 +58,15 @@ class ToMany extends Value
      *
      * @param Translator $translator
      * @param Factory $factory
-     * @param string $name
+     * @param Relation $relation
      * @param string $path
      * @param mixed $value
      */
-    public function __construct(Translator $translator, Factory $factory, string $name, string $path, $value)
+    public function __construct(Translator $translator, Factory $factory, Relation $relation, string $path, $value)
     {
         $this->translator = $translator;
         $this->factory = $factory;
-        $this->name = $name;
+        $this->relation = $relation;
         $this->path = rtrim($path, '/');
         $this->value = $value;
     }
@@ -80,9 +81,13 @@ class ToMany extends Value
         }
 
         if ($this->valid()) {
-            return $this->data = collect($this->value->data)
-                ->map(fn($value, $idx) => $this->factory->createIdentifierValue("{$this->path}/data/{$idx}", $value))
-                ->all();
+            return $this->data = collect($this->value->data)->map(function ($value, $idx) {
+                return $this->factory->createIdentifierValue(
+                    "{$this->path}/data/{$idx}",
+                    $value,
+                    $this->relation,
+                );
+            })->all();
         }
 
         throw new LogicException('Invalid to-many relationship object.');
@@ -128,7 +133,7 @@ class ToMany extends Value
             return $errors->push($this->translator->fieldExpectsToMany(
                 $this->parent(),
                 $this->member() ?: 'data',
-                $this->name
+                $this->relation->name(),
             ));
         }
 

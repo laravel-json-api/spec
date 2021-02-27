@@ -106,6 +106,18 @@ return [
         'code' => '',
     ],
 
+    'resource_type_not_supported_by_to_one_relationship' => [
+        'title' => 'Onverwerkbare Entiteit',
+        'detail' => 'Het veld :field moet een naar-één relatie zijn die :types resources bevat.',
+        'code' => '',
+    ],
+
+    'resource_type_not_supported_by_to_many_relationship' => [
+        'title' => 'Onverwerkbare Entiteit',
+        'detail' => 'Het veld :field moet een naar-velen relatie zijn die :types resources bevat.',
+        'code' => '',
+    ],
+
     'resource_type_not_recognised' => [
         'title' => 'Niet Ondersteund',
         'detail' => 'Resource type :type wordt niet herkend.',

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. This project adheres to
 [Semantic Versioning](http://semver.org/) and [this changelog format](http://keepachangelog.com/).
 
+## [1.0.0-alpha.4] - 2021-02-27
+
+### Added
+
+- Decoding JSON document now rejects an empty string with a specific exception message indicating that JSON is expected.
+- Sending an incorrect resource type for a relationship is now rejected. For example, if a relation expects `tags` but
+  the client provides `posts`, it will be rejected with a message that `posts` are not supported.
+
+### Changed
+
+- **BREAKING** The `ToOne`, `ToMany` and `Identifier` value objects now expect the relation object to be passed into
+  their constructor. This also affects the methods on the factory to create them.
+
 ## [1.0.0-alpha.3] - 2021-02-09
 
 ### Added

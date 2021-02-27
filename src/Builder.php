@@ -21,6 +21,12 @@ namespace LaravelJsonApi\Spec;
 
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Arr;
+use JsonException;
+use function array_merge;
+use function is_object;
+use function is_string;
+use function json_decode;
+use function trim;
 
 abstract class Builder
 {
@@ -94,11 +100,15 @@ abstract class Builder
      */
     private function decode(string $json): object
     {
+        if (empty(trim($json))) {
+            throw new UnexpectedDocumentException('Expecting JSON to decode.');
+        }
+
         try {
             if (is_string($json)) {
                 $json = json_decode($json, false, 512, JSON_THROW_ON_ERROR);
             }
-        } catch (\JsonException $ex) {
+        } catch (JsonException $ex) {
             throw new UnexpectedDocumentException('Invalid JSON.', 0, $ex);
         }
 

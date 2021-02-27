@@ -100,6 +100,18 @@ return [
         'code' => '',
     ],
 
+    'resource_type_not_supported_by_to_one_relationship' => [
+        'title' => 'Entité non traitable',
+        'detail' => 'Le champ :field doit être une relation "to-one" contenant des ressources de type :types.',
+        'code' => '',
+    ],
+
+    'resource_type_not_supported_by_to_many_relationship' => [
+        'title' => 'Entité non traitable',
+        'detail' => 'Le champ :field doit être une relation "to-many" contenant des ressources de type :types.',
+        'code' => '',
+    ],
+
     'resource_type_not_recognised' => [
         'title' => 'Non supporté',
         'detail' => "Le type de ressource :type n'est pas reconnu.",
