@@ -36,8 +36,8 @@ class ResourceTest extends TestCase
 
         $this->app->instance(Specification::class, $spec = $this->createMock(Specification::class));
 
-        $spec->method('clientIds')->willReturnCallback(fn($type) => 'podcasts' === $type);
-        $spec->method('exists')->willReturnCallback(fn($type, $id) => '999' !== $id);
+        $spec->method('clientIds')->willReturnCallback(fn ($type) => 'podcasts' === $type);
+        $spec->method('exists')->willReturnCallback(fn ($type, $id) => '999' !== $id);
         $spec->method('fields')->willReturnMap([
             ['posts', [
                 $this->createAttribute('title'),
@@ -322,9 +322,7 @@ class ResourceTest extends TestCase
                             'slug' => 'hello-world',
                         ],
                         'relationships' => [
-                            'author' => [
-                                'meta' => ['foo' => 'bar'],
-                            ],
+                            'author' => [],
                         ],
                     ],
                 ],
@@ -986,5 +984,4 @@ class ResourceTest extends TestCase
 
         $this->assertInvalid($document, $expected);
     }
-
 }
