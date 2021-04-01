@@ -322,7 +322,7 @@ class ResourceTest extends TestCase
                             'slug' => 'hello-world',
                         ],
                         'relationships' => [
-                            'author' => [],
+                            'author' => new \stdClass,
                         ],
                     ],
                 ],
