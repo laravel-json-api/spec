@@ -74,20 +74,20 @@ class ToMany extends Value
     /**
      * @return Identifier[]
      */
-    public function data(): array
+    public function data(): ?array
     {
         if (is_array($this->data)) {
             return $this->data;
         }
 
         if ($this->valid()) {
-            return $this->data = collect($this->value->data)->map(function ($value, $idx) {
+            return $this->data = property_exists($this->value, 'data') ? collect($this->value->data)->map(function ($value, $idx) {
                 return $this->factory->createIdentifierValue(
                     "{$this->path}/data/{$idx}",
                     $value,
                     $this->relation,
                 );
-            })->all();
+            })->all() : null;
         }
 
         throw new LogicException('Invalid to-many relationship object.');
@@ -100,7 +100,7 @@ class ToMany extends Value
     {
         if ($this->valid()) {
             return collect($this->data())->reduce(
-                fn(ErrorList $carry, Identifier $identifier) => $carry->merge($identifier->errors()),
+                fn (ErrorList $carry, Identifier $identifier) => $carry->merge($identifier->errors()),
                 new ErrorList()
             );
         }
@@ -122,29 +122,30 @@ class ToMany extends Value
             ));
         }
 
-        if (!property_exists($this->value, 'data')) {
+        if (!property_exists($this->value, 'data') && !property_exists($this->value, 'links') && !property_exists($this->value, 'meta')) {
             return $errors->push($this->translator->memberRequired(
                 $this->path ?: '/',
                 'data'
             ));
         }
 
-        if (is_object($this->value->data) && (isset($this->value->data->type) || isset($this->value->data->id))) {
-            return $errors->push($this->translator->fieldExpectsToMany(
-                $this->parent(),
-                $this->member() ?: 'data',
-                $this->relation->name(),
-            ));
-        }
+        if (property_exists($this->value, 'data')) {
+            if (is_object($this->value->data) && (isset($this->value->data->type) || isset($this->value->data->id))) {
+                return $errors->push($this->translator->fieldExpectsToMany(
+                    $this->parent(),
+                    $this->member() ?: 'data',
+                    $this->relation->name(),
+                ));
+            }
 
-        if (!is_array($this->value->data)) {
-            return $errors->push($this->translator->memberNotArray(
-                $this->path,
-                'data'
-            ));
+            if (!is_array($this->value->data)) {
+                return $errors->push($this->translator->memberNotArray(
+                    $this->path,
+                    'data'
+                ));
+            }
         }
 
         return $errors;
     }
-
 }

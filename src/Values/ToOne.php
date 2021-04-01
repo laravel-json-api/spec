@@ -86,7 +86,7 @@ class ToOne extends Value
         }
 
         if ($this->valid()) {
-            return $this->data = !is_null($this->value->data) ? $this->factory->createIdentifierValue(
+            return $this->data = property_exists($this->value, 'data') && !is_null($this->value->data) ? $this->factory->createIdentifierValue(
                 "{$this->path}/data",
                 $this->value->data,
                 $this->relation,
@@ -125,14 +125,14 @@ class ToOne extends Value
             ));
         }
 
-        if (!property_exists($this->value, 'data')) {
+        if (!property_exists($this->value, 'data') && !property_exists($this->value, 'links') && !property_exists($this->value, 'meta')) {
             return $errors->push($this->translator->memberRequired(
                 $this->path ?: '/',
                 'data'
             ));
         }
 
-        if (is_array($this->value->data)) {
+        if (property_exists($this->value, 'data') && is_array($this->value->data)) {
             return $errors->push($this->translator->fieldExpectsToOne(
                 $this->parent(),
                 $this->member() ?: 'data',
@@ -142,5 +142,4 @@ class ToOne extends Value
 
         return $errors;
     }
-
 }
