@@ -21,6 +21,8 @@ namespace LaravelJsonApi\Spec\Tests\Integration;
 
 use LaravelJsonApi\Contracts\Schema\Attribute;
 use LaravelJsonApi\Contracts\Schema\Relation;
+use LaravelJsonApi\Core\Document\Error;
+use LaravelJsonApi\Core\Document\ErrorList;
 use LaravelJsonApi\Spec\Document;
 use LaravelJsonApi\Spec\ServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
@@ -44,7 +46,34 @@ class TestCase extends BaseTestCase
     {
         $this->assertFalse($document->valid());
         $this->assertTrue($document->invalid());
-        $this->assertSame($expected, $document->errors()->toArray());
+        $this->assertErrors($expected, $document->errors());
+    }
+
+    /**
+     * Assert an error list.
+     *
+     * @param array $expected
+     * @param ErrorList $errors
+     */
+    protected function assertErrors(array $expected, ErrorList $errors): void
+    {
+        $this->assertSame($expected, $errors->toArray());
+    }
+
+    /**
+     * Assert a single error.
+     *
+     * @param array $expected
+     * @param $errorOrErrors
+     */
+    protected function assertError(array $expected, $errorOrErrors): void
+    {
+        if ($errorOrErrors instanceof ErrorList) {
+            $this->assertErrors([$expected], $errorOrErrors);
+        } else {
+            $this->assertInstanceOf(Error::class, $errorOrErrors);
+            $this->assertEquals($expected, $errorOrErrors->toArray());
+        }
     }
 
     /**

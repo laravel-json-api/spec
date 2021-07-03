@@ -19,9 +19,9 @@ declare(strict_types=1);
 
 namespace LaravelJsonApi\Spec\Tests\Integration;
 
+use LaravelJsonApi\Core\Exceptions\JsonApiException;
 use LaravelJsonApi\Spec\ResourceBuilder;
 use LaravelJsonApi\Spec\Specification;
-use LaravelJsonApi\Spec\UnexpectedDocumentException;
 use LogicException;
 
 class ResourceTest extends TestCase
@@ -781,13 +781,20 @@ class ResourceTest extends TestCase
      */
     public function testEmptyString(string $value): void
     {
-        $this->expectException(UnexpectedDocumentException::class);
-        $this->expectExceptionMessage('Expecting JSON to decode.');
-
         /** @var ResourceBuilder $builder */
         $builder = $this->app->make(ResourceBuilder::class);
 
-        $builder->expects('posts', '1')->build($value);
+        try {
+            $builder->expects('posts', '1')->build($value);
+            $this->fail('No exception thrown.');
+        } catch (JsonApiException $ex) {
+            $this->assertSame(400, $ex->getStatusCode());
+            $this->assertError([
+                'detail' => 'Expecting JSON to decode.',
+                'status' => '400',
+                'title' => 'Invalid JSON',
+            ], $ex->toErrors());
+        }
     }
 
     public function testInvalidJson(): void
@@ -801,8 +808,16 @@ class ResourceTest extends TestCase
             );
 
             $this->fail('No exception thrown.');
-        } catch (UnexpectedDocumentException $ex) {
-            $this->assertInstanceOf(\JsonException::class, $ex->getPrevious());
+        } catch (JsonApiException $ex) {
+            $previous = $ex->getPrevious();
+            $this->assertInstanceOf(\JsonException::class, $previous);
+            $this->assertSame(400, $ex->getStatusCode());
+            $this->assertError([
+                'code' => (string) $previous->getCode(),
+                'detail' => $previous->getMessage(),
+                'status' => '400',
+                'title' => 'Invalid JSON',
+            ], $ex->toErrors());
         }
     }
 
@@ -830,13 +845,20 @@ class ResourceTest extends TestCase
      */
     public function testNonObject(string $json): void
     {
-        $this->expectException(UnexpectedDocumentException::class);
-        $this->expectExceptionMessage('Expecting JSON to decode to an object.');
-
         /** @var ResourceBuilder $builder */
         $builder = $this->app->make(ResourceBuilder::class);
 
-        $builder->expects('posts', '1')->build($json);
+        try {
+            $builder->expects('posts', '1')->build($json);
+            $this->fail('No exception thrown.');
+        } catch (JsonApiException $ex) {
+            $this->assertSame(400, $ex->getStatusCode());
+            $this->assertError([
+                'detail' => 'Expecting JSON to decode to an object.',
+                'status' => '400',
+                'title' => 'Invalid JSON',
+            ], $ex->toErrors());
+        }
     }
 
     public function testCustomPipe(): void

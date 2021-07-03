@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. This project adheres to
 [Semantic Versioning](http://semver.org/) and [this changelog format](http://keepachangelog.com/).
 
+## Unreleased
+
+### Changed
+
+- **BREAKING** JSON decoding has been moved to a `JsonDecoder` class. This now throws a `JsonApiException` with
+  translated error objects. Previously it threw the `UnexpectedDocumentException` class.
+- **BREAKING** Document builder classes now expect the `JsonDecoder` as their first constructor argument. This is
+  unlikely to affect consuming applications as the builder classes should be created via the service container.
+
+### Removed
+
+- **BREAKING** Removed the `UnexpectedDocumentException` class as it is no longer in use.
+
 ## [1.0.0-beta.1] - 2021-03-30
 
 Initial beta release, no changes since `alpha.4`.
