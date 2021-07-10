@@ -21,15 +21,16 @@ namespace LaravelJsonApi\Spec;
 
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Arr;
-use JsonException;
+use LaravelJsonApi\Core\Exceptions\JsonApiException;
 use function array_merge;
-use function is_object;
-use function is_string;
-use function json_decode;
-use function trim;
 
 abstract class Builder
 {
+
+    /**
+     * @var JsonDecoder
+     */
+    private JsonDecoder $decoder;
 
     /**
      * @var Pipeline
@@ -55,10 +56,12 @@ abstract class Builder
     /**
      * Builder constructor.
      *
+     * @param JsonDecoder $decoder
      * @param Pipeline $pipeline
      */
-    public function __construct(Pipeline $pipeline)
+    public function __construct(JsonDecoder $decoder, Pipeline $pipeline)
     {
+        $this->decoder = $decoder;
         $this->pipeline = $pipeline;
     }
 
@@ -76,12 +79,12 @@ abstract class Builder
     /**
      * @param string $json
      * @return Document
-     * @throws UnexpectedDocumentException
+     * @throws JsonApiException
      */
     public function build(string $json): Document
     {
         $document = $this->create(
-            $this->decode($json)
+            $this->decoder->decode($json)
         );
 
         $pipes = array_merge($this->pipes(), $this->pipes);
@@ -91,31 +94,5 @@ abstract class Builder
             ->through($pipes)
             ->via('validate')
             ->thenReturn();
-    }
-
-    /**
-     * @param string $json
-     * @return object
-     * @throws UnexpectedDocumentException
-     */
-    private function decode(string $json): object
-    {
-        if (empty(trim($json))) {
-            throw new UnexpectedDocumentException('Expecting JSON to decode.');
-        }
-
-        try {
-            if (is_string($json)) {
-                $json = json_decode($json, false, 512, JSON_THROW_ON_ERROR);
-            }
-        } catch (JsonException $ex) {
-            throw new UnexpectedDocumentException('Invalid JSON.', 0, $ex);
-        }
-
-        if (is_object($json)) {
-            return $json;
-        }
-
-        throw new UnexpectedDocumentException('Expecting JSON to decode to an object.');
     }
 }

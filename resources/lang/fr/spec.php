@@ -34,6 +34,22 @@ return [
     | @see http://jsonapi.org/format/#errors
     */
 
+    'json_empty' => [
+        'title' => 'JSON non valide',
+        'detail' => 'Attendez-vous à ce que JSON décode.',
+        'code' => '',
+    ],
+
+    'json_error' => [
+        'title' => 'JSON non valide',
+    ],
+
+    'json_not_object' => [
+        'title' => 'JSON non valide',
+        'detail' => 'Attendre que JSON décode en objet.',
+        'code' => '',
+    ],
+
     'member_required' => [
         'title' => 'Document JSON:API invalide',
         'detail' => 'Le membre :member est obligatoire.',

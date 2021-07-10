@@ -34,6 +34,22 @@ return [
     | @see http://jsonapi.org/format/#errors
     */
 
+    'json_empty' => [
+        'title' => 'Ongeldige JSON',
+        'detail' => 'Verwachten dat JSON zal decoderen.',
+        'code' => '',
+    ],
+
+    'json_error' => [
+        'title' => 'Ongeldige JSON',
+    ],
+
+    'json_not_object' => [
+        'title' => 'Ongeldige JSON',
+        'detail' => 'Verwachten dat JSON naar een object decodeert.',
+        'code' => '',
+    ],
+
     'member_required' => [
         'title' => 'Niet-Conform JSON:API Document',
         'detail' => 'Het onderdeel :member is vereist.',

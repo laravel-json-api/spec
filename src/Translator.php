@@ -20,6 +20,7 @@ declare(strict_types=1);
 namespace LaravelJsonApi\Spec;
 
 use Illuminate\Contracts\Translation\Translator as IlluminateTranslator;
+use JsonException;
 use LaravelJsonApi\Contracts\Schema\Relation;
 use LaravelJsonApi\Core\Document\Error;
 use LaravelJsonApi\Core\Support\Str;
@@ -40,6 +41,49 @@ class Translator
     public function __construct(IlluminateTranslator $translator)
     {
         $this->translator = $translator;
+    }
+
+    /**
+     * Create an error for when the JSON string is empty.
+     *
+     * @return Error
+     */
+    public function jsonEmpty(): Error
+    {
+        return Error::make()
+            ->setStatus(400)
+            ->setCode($this->trans('json_empty', 'code'))
+            ->setTitle($this->trans('json_empty', 'title'))
+            ->setDetail($this->trans('json_empty', 'detail'));
+    }
+
+    /**
+     * Create an error for a JSON decoding exception.
+     *
+     * @param JsonException $ex
+     * @return Error
+     */
+    public function jsonError(JsonException $ex): Error
+    {
+        return Error::make()
+            ->setStatus(400)
+            ->setCode($ex->getCode())
+            ->setTitle($this->trans('json_error', 'title'))
+            ->setDetail($this->translator->get($ex->getMessage()));
+    }
+
+    /**
+     * Create an error for when a JSON string does not decode to an object.
+     *
+     * @return Error
+     */
+    public function jsonNotObject(): Error
+    {
+        return Error::make()
+            ->setStatus(400)
+            ->setCode($this->trans('json_not_object', 'code'))
+            ->setTitle($this->trans('json_not_object', 'title'))
+            ->setDetail($this->trans('json_not_object', 'detail'));
     }
 
     /**
