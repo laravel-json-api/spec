@@ -28,7 +28,7 @@
         "illuminate/contracts": "^8.0",
         "illuminate/pipeline": "^8.0",
         "illuminate/support": "^8.0",
-        "laravel-json-api/core": "^1.0.0-beta.1"
+        "laravel-json-api/core": "^1.0.0"
     },
     "require-dev": {
         "orchestra/testbench": "^6.9",
@@ -54,7 +54,7 @@
             ]
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "config": {
         "sort-packages": true
