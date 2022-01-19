@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
+- Package now supports Laravel 9.
 - Package now supports `2.0` of the `laravel-json-api/core` dependency.
 
 ## [1.0.0] - 2021-07-31

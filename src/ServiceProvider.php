@@ -33,12 +33,12 @@ class ServiceProvider extends BaseServiceProvider
     public function boot(): void
     {
         $this->loadTranslationsFrom(
-            __DIR__ . '/../resources/lang',
+            __DIR__ . '/../lang',
             JsonApiSpec::$translationNamespace
         );
 
         $this->publishes([
-            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/' . JsonApiSpec::$translationNamespace),
+            __DIR__ . '/../lang' => $this->app->langPath() . '/vendor/' . JsonApiSpec::$translationNamespace,
         ]);
     }
 

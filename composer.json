@@ -25,13 +25,13 @@
     "require": {
         "php": "^7.4|^8.0",
         "ext-json": "*",
-        "illuminate/contracts": "^8.0",
-        "illuminate/pipeline": "^8.0",
-        "illuminate/support": "^8.0",
+        "illuminate/contracts": "^8.0|^9.0",
+        "illuminate/pipeline": "^8.0|^9.0",
+        "illuminate/support": "^8.0|^9.0",
         "laravel-json-api/core": "^1.0|^2.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^6.23",
+        "orchestra/testbench": "^6.23|^7.0",
         "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {
@@ -55,7 +55,7 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": false,
+    "prefer-stable": true,
     "config": {
         "sort-packages": true
     }
