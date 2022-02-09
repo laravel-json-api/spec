@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. This project adheres to
 [Semantic Versioning](http://semver.org/) and [this changelog format](http://keepachangelog.com/).
 
+## [1.1.0] - 2022-02-09
+
+### Added
+
+- Package now supports Laravel 9.
+- Package now supports `2.0` of the `laravel-json-api/core` dependency.
+- [#5](https://github.com/laravel-json-api/spec/pull/5) Add Italian translation files.
+
 ## [1.0.0] - 2021-07-31
 
 Initial stable release, with no changes from `1.0.0-beta.2`.

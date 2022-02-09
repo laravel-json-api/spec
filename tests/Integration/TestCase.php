@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2021 Cloud Creativity Limited
+ * Copyright 2022 Cloud Creativity Limited
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ declare(strict_types=1);
 
 namespace LaravelJsonApi\Spec\Tests\Integration;
 
+use Illuminate\Foundation\Testing\Concerns\InteractsWithDeprecationHandling;
 use LaravelJsonApi\Contracts\Schema\Attribute;
 use LaravelJsonApi\Contracts\Schema\Relation;
 use LaravelJsonApi\Core\Document\Error;
@@ -29,6 +30,14 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
+    use InteractsWithDeprecationHandling;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->withoutDeprecationHandling();
+    }
 
     /**
      * @inheritDoc

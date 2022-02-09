@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2021 Cloud Creativity Limited
+ * Copyright 2022 Cloud Creativity Limited
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,132 +35,132 @@ return [
     */
 
     'json_empty' => [
-        'title' => 'JSON non valide',
-        'detail' => 'Attendez-vous à ce que JSON décode.',
+        'title' => 'JSON non valido',
+        'detail' => 'Previsto un JSON da decodificare.',
         'code' => '',
     ],
 
     'json_error' => [
-        'title' => 'JSON non valide',
+        'title' => 'JSON non valido',
     ],
 
     'json_not_object' => [
-        'title' => 'JSON non valide',
-        'detail' => 'Attendre que JSON décode en objet.',
+        'title' => 'JSON non valido',
+        'detail' => 'Previsto un JSON da decodificare in un oggetto.',
         'code' => '',
     ],
 
     'member_required' => [
-        'title' => 'Document JSON:API invalide',
-        'detail' => 'Le membre :member est obligatoire.',
+        'title' => 'Documento JSON:API non conforme',
+        'detail' => 'Il membro :member è richiesto.',
         'code' => '',
     ],
 
     'member_object_expected' => [
-        'title' => 'Document JSON:API invalide',
-        'detail' => 'Le membre :member doit être un objet.',
+        'title' => 'Documento JSON:API non conforme',
+        'detail' => 'Il membro :member deve essere un oggetto.',
         'code' => '',
     ],
 
     'member_array_expected' => [
-        'title' => 'Document JSON:API invalide',
-        'detail' => 'Le membre :member doit être un tableau.',
+        'title' => 'Documento JSON:API non conforme',
+        'detail' => 'Il membro :member deve essere un array.',
         'code' => '',
     ],
 
     'member_identifier_expected' => [
-        'title' => 'Document JSON:API invalide',
-        'detail' => 'Le membre :member doit être un identifiant de ressource.',
+        'title' => 'Documento JSON:API non conforme',
+        'detail' => 'Il membro :member deve essere un identificatore di risorsa.',
         'code' => '',
     ],
 
     'member_string_expected' => [
-        'title' => 'Document JSON:API invalide',
-        'detail' => 'Le membre :member doit être une chaîne de caractères.',
+        'title' => 'Documento JSON:API non conforme',
+        'detail' => 'Il membro :member deve essere una stringa.',
         'code' => '',
     ],
 
     'member_empty' => [
-        'title' => 'Document JSON:API invalide',
-        'detail' => 'Le membre :member ne peut être vide.',
+        'title' => 'Documento JSON:API non conforme',
+        'detail' => 'Il membro :member non può essere vuoto.',
         'code' => '',
     ],
 
     'member_field_not_allowed' => [
-        'title' => 'Document JSON:API invalide',
-        'detail' => 'Le membre :member ne peut avoir de champ :field.',
+        'title' => 'Documento JSON:API non conforme',
+        'detail' => 'Il membro :member non può avere un campo :field.',
         'code' => '',
     ],
 
     'member_field_not_supported' => [
-        'title' => 'Document JSON:API invalide',
-        'detail' => "Le champ :field n'est pas un élément de type :type reconnu.",
+        'title' => 'Documento JSON:API non conforme',
+        'detail' => 'Il campo :field non è un :type supportato.',
         'code' => '',
     ],
 
     'field_expects_to_one' => [
-        'title' => 'Document JSON:API invalide',
-        'detail' => 'Le champ :field doit être une relation "to-one".',
+        'title' => 'Documento JSON:API non conforme',
+        'detail' => 'Il campo :field deve essere una relazione to-one.',
         'code' => '',
     ],
 
     'field_expects_to_many' => [
-        'title' => 'Document JSON:API invalide',
-        'detail' => 'Le champ :field doit être une relation "to-many".',
+        'title' => 'Documento JSON:API non conforme',
+        'detail' => 'Il campo :field deve essere una relazione to-many.',
         'code' => '',
     ],
 
     'resource_type_not_supported' => [
-        'title' => 'Non supporté',
-        'detail' => "Le type de ressource :type n'est pas supporté par ce endpoint.",
+        'title' => 'Non supportato',
+        'detail' => 'Il tipo di risorsa :type non è supportato da questo endpoint.',
         'code' => '',
     ],
 
     'resource_type_not_supported_by_to_one_relationship' => [
-        'title' => 'Entité non traitable',
-        'detail' => 'Le champ :field doit être une relation "to-one" contenant des ressources de type :types.',
+        'title' => 'Entità non processabile',
+        'detail' => 'Il campo :field deve essere una relazione to-one contenente risorse :types.',
         'code' => '',
     ],
 
     'resource_type_not_supported_by_to_many_relationship' => [
-        'title' => 'Entité non traitable',
-        'detail' => 'Le champ :field doit être une relation "to-many" contenant des ressources de type :types.',
+        'title' => 'Entità non processabile',
+        'detail' => 'Il campo :field deve essere una relazione to-many contenente risorse :types.',
         'code' => '',
     ],
 
     'resource_type_not_recognised' => [
-        'title' => 'Non supporté',
-        'detail' => "Le type de ressource :type n'est pas reconnu.",
+        'title' => 'Non supportato',
+        'detail' => 'Il tipo di risorsa :type non è riconosciuto.',
         'code' => '',
     ],
 
     'resource_id_not_supported' => [
-        'title' => 'Non supporté',
-        'detail' => "L'identifiant de ressource :id n'est pas supporté par ce endpoint.",
+        'title' => 'Non supportato',
+        'detail' => 'L\'id risorsa :id non è supportato da questo endpoint.',
         'code' => '',
     ],
 
     'resource_client_ids_not_supported' => [
-        'title' => 'Non supporté',
-        'detail' => "Le type de ressource :type n'accepte pas les identifiants générés par le client.",
+        'title' => 'Non supportato',
+        'detail' => 'Il tipo di risorsa :type non supporta gli ID generati dal client.',
         'code' => '',
     ],
 
     'resource_exists' => [
-        'title' => 'Conflit',
-        'detail' => 'La ressource :id existe déjà.',
+        'title' => 'Conflitto',
+        'detail' => 'La risorsa :id esiste già.',
         'code' => '',
     ],
 
     'resource_not_found' => [
-        'title' => 'Introuvable',
-        'detail' => "La ressource spécifiée n'existe pas.",
+        'title' => 'Non trovato',
+        'detail' => 'La risorsa correlata non esiste.',
         'code' => '',
     ],
 
     'resource_field_exists_in_attributes_and_relationships' => [
-        'title' => "Document JSON:API invalide",
-        'detail' => 'Le champ :field ne peut être à la fois un attribut et une relation.',
+        'title' => 'Documento JSON:API non conforme',
+        'detail' => 'Il campo :field non può esistere come attributo e come relazione.',
         'code' => '',
     ],
 ];

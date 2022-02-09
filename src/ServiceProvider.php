@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2021 Cloud Creativity Limited
+ * Copyright 2022 Cloud Creativity Limited
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,12 +33,12 @@ class ServiceProvider extends BaseServiceProvider
     public function boot(): void
     {
         $this->loadTranslationsFrom(
-            __DIR__ . '/../resources/lang',
+            __DIR__ . '/../lang',
             JsonApiSpec::$translationNamespace
         );
 
         $this->publishes([
-            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/' . JsonApiSpec::$translationNamespace),
+            __DIR__ . '/../lang' => $this->app->langPath() . '/vendor/' . JsonApiSpec::$translationNamespace,
         ]);
     }
 
