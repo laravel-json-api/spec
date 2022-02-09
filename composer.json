@@ -54,7 +54,7 @@
             ]
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": false,
     "config": {
         "sort-packages": true
