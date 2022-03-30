@@ -37,7 +37,9 @@ class ResourceTest extends TestCase
         $this->app->instance(Specification::class, $spec = $this->createMock(Specification::class));
 
         $spec->method('clientIds')->willReturnCallback(fn($type) => 'podcasts' === $type);
-        $spec->method('exists')->willReturnCallback(fn($type, $id) => '999' !== $id);
+        $spec->method('exists')->willReturnCallback(
+            fn($type, $id) => !in_array($id, ['0', '999'], true)
+        );
         $spec->method('fields')->willReturnMap([
             ['posts', [
                 $this->createAttribute('title'),
@@ -54,6 +56,18 @@ class ResourceTest extends TestCase
             ]],
         ]);
         $spec->method('types')->willReturn(['posts', 'users', 'comments', 'podcasts', 'tags']);
+    }
+
+    /**
+     * @return array
+     */
+    public function emptyIdProvider(): array
+    {
+        return [
+            [''],
+            [' '],
+            ['      '],
+        ];
     }
 
     /**
@@ -921,6 +935,26 @@ class ResourceTest extends TestCase
         $this->assertTrue($document->valid());
     }
 
+    public function testCreateWithClientIdIsZero(): void
+    {
+        $data = [
+            'type' => 'podcasts',
+            'id' => '0',
+            'attributes' => [
+                'title' => 'My first podcast',
+            ],
+        ];
+
+        /** @var ResourceBuilder $builder */
+        $builder = $this->app->make(ResourceBuilder::class);
+
+        $document = $builder
+            ->expects('podcasts', null)
+            ->build(json_encode(compact('data')));
+
+        $this->assertTrue($document->valid());
+    }
+
     public function testCreateWithClientIdAlreadyExists(): void
     {
         $data = [
@@ -936,6 +970,38 @@ class ResourceTest extends TestCase
             'source' => ['pointer' => '/data/id'],
             'status' => '409',
             'title' => 'Conflict',
+        ];
+
+        /** @var ResourceBuilder $builder */
+        $builder = $this->app->make(ResourceBuilder::class);
+
+        $document = $builder
+            ->expects('podcasts', null)
+            ->build(json_encode(compact('data')));
+
+        $this->assertInvalid($document, [$expected]);
+    }
+
+    /**
+     * @param string $id
+     * @return void
+     * @dataProvider emptyIdProvider
+     */
+    public function testCreateWithClientIdIsEmpty(string $id): void
+    {
+        $data = [
+            'type' => 'podcasts',
+            'id' => $id,
+            'attributes' => [
+                'title' => 'My first podcast',
+            ],
+        ];
+
+        $expected = [
+            'detail' => 'The member id cannot be empty.',
+            'source' => ['pointer' => '/data/id'],
+            'status' => '400',
+            'title' => 'Non-Compliant JSON:API Document',
         ];
 
         /** @var ResourceBuilder $builder */
@@ -965,6 +1031,26 @@ class ResourceTest extends TestCase
             ->build(json_encode($json));
 
         $this->assertInvalid($document, [$expected]);
+    }
+
+    public function testUpdateWithZeroId(): void
+    {
+        $data = [
+            'type' => 'posts',
+            'id' => '0',
+            'attributes' => [
+                'title' => 'Hello World',
+            ],
+        ];
+
+        /** @var ResourceBuilder $builder */
+        $builder = $this->app->make(ResourceBuilder::class);
+
+        $document = $builder
+            ->expects('posts', '0')
+            ->build(json_encode(['data' => $data]));
+
+        $this->assertTrue($document->valid());
     }
 
     public function testDuplicateFields(): void

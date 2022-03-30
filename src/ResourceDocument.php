@@ -19,6 +19,8 @@ declare(strict_types=1);
 
 namespace LaravelJsonApi\Spec;
 
+use LaravelJsonApi\Spec\Values\Identifier;
+
 class ResourceDocument extends Document
 {
 
@@ -58,11 +60,21 @@ class ResourceDocument extends Document
     }
 
     /**
+     * Get the document's expected resource id.
+     *
      * @return string|null
      */
     public function id(): ?string
     {
         return $this->resourceId;
+    }
+
+    /**
+     * @return bool
+     */
+    public function expectsId(): bool
+    {
+        return !Identifier::idIsEmpty($this->resourceId);
     }
 
 }

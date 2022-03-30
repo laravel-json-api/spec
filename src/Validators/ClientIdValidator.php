@@ -23,6 +23,7 @@ use LaravelJsonApi\Core\Document\Error;
 use LaravelJsonApi\Spec\ResourceDocument;
 use LaravelJsonApi\Spec\Specification;
 use LaravelJsonApi\Spec\Translator;
+use LaravelJsonApi\Spec\Values\Identifier;
 
 class ClientIdValidator
 {
@@ -58,7 +59,7 @@ class ClientIdValidator
      */
     public function validate(ResourceDocument $document, \Closure $next): ResourceDocument
     {
-        if ($document->id()) {
+        if ($document->expectsId()) {
             return $next($document);
         }
 
@@ -92,7 +93,7 @@ class ClientIdValidator
             return $this->translator->memberNotString('/data', 'id');
         }
 
-        if (empty($value)) {
+        if (Identifier::idIsEmpty($value)) {
             return $this->translator->memberEmpty('/data', 'id');
         }
 
