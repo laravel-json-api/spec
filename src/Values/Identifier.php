@@ -55,6 +55,7 @@ class Identifier extends Value
      *
      * @param string|null $id
      * @return bool
+     * @deprecated 2.0 use `\LaravelJsonApi\Core\Document\ResourceIdentifier::idIsEmpty()` instead.
      */
     public static function idIsEmpty(?string $id): bool
     {

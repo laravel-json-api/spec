@@ -5,12 +5,6 @@ All notable changes to this project will be documented in this file. This projec
 
 ## Unreleased
 
-### Added
-
-- New `Identifier::idIsEmpty()` static method for checking that an `id` value is not empty. This check ensures that the
-  trimmed string is empty and that the string is not `"0"`, as zero could be used for a resource id. This new static
-  method has been added to ensure the logic of determining if an id value is empty is in one place.
-
 ### Fixed
 
 - The package now accepts `"0"` as a valid client generated id. Previously it was rejected with a message that the id
