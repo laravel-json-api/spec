@@ -48,7 +48,23 @@ class Identifier extends Value
     /**
      * @var Relation|null
      */
-    private ?Relation $relation = null;
+    private ?Relation $relation;
+
+    /**
+     * Is the provided id empty?
+     *
+     * @param string|null $id
+     * @return bool
+     * @deprecated 2.0 use `\LaravelJsonApi\Core\Document\ResourceIdentifier::idIsEmpty()` instead.
+     */
+    public static function idIsEmpty(?string $id): bool
+    {
+        if (null === $id) {
+            return true;
+        }
+
+        return '0' !== $id && empty(trim($id));
+    }
 
     /**
      * Identifier constructor.
@@ -195,7 +211,7 @@ class Identifier extends Value
             );
         }
 
-        if (empty($id) && '0' !== $id) {
+        if (self::idIsEmpty($id)) {
             return $this->translator->memberEmpty(
                 $this->path,
                 'id'

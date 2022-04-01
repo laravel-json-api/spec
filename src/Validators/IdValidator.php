@@ -23,6 +23,7 @@ use LaravelJsonApi\Core\Document\Error;
 use LaravelJsonApi\Spec\ResourceDocument;
 use LaravelJsonApi\Spec\Specification;
 use LaravelJsonApi\Spec\Translator;
+use LaravelJsonApi\Spec\Values\Identifier;
 
 class IdValidator
 {
@@ -86,7 +87,7 @@ class IdValidator
             return $this->translator->memberNotString('/data', 'id');
         }
 
-        if (empty($value)) {
+        if (Identifier::idIsEmpty($value)) {
             return $this->translator->memberEmpty('/data', 'id');
         }
 
