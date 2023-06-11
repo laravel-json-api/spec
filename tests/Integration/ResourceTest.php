@@ -19,6 +19,7 @@ declare(strict_types=1);
 
 namespace LaravelJsonApi\Spec\Tests\Integration;
 
+use LaravelJsonApi\Contracts\Spec\ResourceDocumentComplianceChecker;
 use LaravelJsonApi\Core\Exceptions\JsonApiException;
 use LaravelJsonApi\Spec\ResourceBuilder;
 use LaravelJsonApi\Spec\Specification;
@@ -795,20 +796,15 @@ class ResourceTest extends TestCase
      */
     public function testEmptyString(string $value): void
     {
-        /** @var ResourceBuilder $builder */
-        $builder = $this->app->make(ResourceBuilder::class);
+        /** @var ResourceDocumentComplianceChecker $checker */
+        $checker = $this->app->make(ResourceDocumentComplianceChecker::class);
 
-        try {
-            $builder->expects('posts', '1')->build($value);
-            $this->fail('No exception thrown.');
-        } catch (JsonApiException $ex) {
-            $this->assertSame(400, $ex->getStatusCode());
-            $this->assertError([
-                'detail' => 'Expecting JSON to decode.',
-                'status' => '400',
-                'title' => 'Invalid JSON',
-            ], $ex->toErrors());
-        }
+        $result = $checker->mustSee('posts', '1')->check($value);
+        $this->assertFailedWithError($result, [
+            'detail' => 'Expecting JSON to decode.',
+            'status' => '400',
+            'title' => 'Invalid JSON',
+        ]);
     }
 
     public function testInvalidJson(): void
@@ -905,14 +901,14 @@ class ResourceTest extends TestCase
     {
         ksort($expected);
 
-        /** @var ResourceBuilder $builder */
-        $builder = $this->app->make(ResourceBuilder::class);
+        /** @var ResourceDocumentComplianceChecker $checker */
+        $checker = $this->app->make(ResourceDocumentComplianceChecker::class);
 
-        $document = $builder
-            ->expects('posts', null)
-            ->build(json_encode($json));
+        $result = $checker
+            ->mustSee('posts', null)
+            ->check(json_encode($json));
 
-        $this->assertInvalid($document, [$expected]);
+        $this->assertFailedWithError($result, $expected);
     }
 
     public function testCreateWithClientIdAllowed(): void
@@ -925,14 +921,14 @@ class ResourceTest extends TestCase
             ],
         ];
 
-        /** @var ResourceBuilder $builder */
-        $builder = $this->app->make(ResourceBuilder::class);
+        /** @var ResourceDocumentComplianceChecker $checker */
+        $checker = $this->app->make(ResourceDocumentComplianceChecker::class);
 
-        $document = $builder
-            ->expects('podcasts', null)
-            ->build(json_encode(compact('data')));
+        $result = $checker
+            ->mustSee('podcasts', null)
+            ->check(json_encode(compact('data')));
 
-        $this->assertTrue($document->valid());
+        $this->assertSuccessful($result);
     }
 
     public function testCreateWithClientIdIsZero(): void

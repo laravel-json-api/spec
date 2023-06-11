@@ -22,27 +22,31 @@ namespace LaravelJsonApi\Spec\Tests\Integration;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithDeprecationHandling;
 use LaravelJsonApi\Contracts\Schema\Attribute;
 use LaravelJsonApi\Contracts\Schema\Relation;
+use LaravelJsonApi\Contracts\Support\Result;
 use LaravelJsonApi\Core\Document\Error;
 use LaravelJsonApi\Core\Document\ErrorList;
 use LaravelJsonApi\Spec\Document;
 use LaravelJsonApi\Spec\ServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class TestCase extends BaseTestCase
 {
     use InteractsWithDeprecationHandling;
 
+    /**
+     * @return void
+     */
     protected function setUp(): void
     {
         parent::setUp();
-
         $this->withoutDeprecationHandling();
     }
 
     /**
      * @inheritDoc
      */
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [ServiceProvider::class];
     }
@@ -50,6 +54,7 @@ class TestCase extends BaseTestCase
     /**
      * @param Document $document
      * @param array $expected
+     * @deprecated
      */
     protected function assertInvalid(Document $document, array $expected): void
     {
@@ -73,23 +78,62 @@ class TestCase extends BaseTestCase
      * Assert a single error.
      *
      * @param array $expected
-     * @param $errorOrErrors
+     * @param ErrorList|Error $errorOrErrors
      */
-    protected function assertError(array $expected, $errorOrErrors): void
+    protected function assertError(array $expected, ErrorList|Error $errorOrErrors): void
     {
         if ($errorOrErrors instanceof ErrorList) {
             $this->assertErrors([$expected], $errorOrErrors);
-        } else {
-            $this->assertInstanceOf(Error::class, $errorOrErrors);
-            $this->assertEquals($expected, $errorOrErrors->toArray());
+            return;
         }
+
+        $this->assertEquals($expected, $errorOrErrors->toArray());
+    }
+
+    /**
+     * @param Result $result
+     * @return void
+     */
+    public function assertSuccessful(Result $result): void
+    {
+        $this->assertTrue($result->didSucceed());
+        $this->assertFalse($result->didFail());
+        $this->assertEmpty($result->errors());
+    }
+
+    /**
+     * Assert a failed result with a single error.
+     *
+     * @param Result $result
+     * @param array $expected
+     * @return void
+     */
+    protected function assertFailedWithError(Result $result, array $expected): void
+    {
+        $this->assertTrue($result->didFail());
+        $this->assertFalse($result->didSucceed());
+        $this->assertError($expected, $result->errors());
+    }
+
+    /**
+     * Assert a failed result with multiple errors.
+     *
+     * @param Result $result
+     * @param array $expected
+     * @return void
+     */
+    protected function assertFailedWithErrors(Result $result, array $expected): void
+    {
+        $this->assertTrue($result->didFail());
+        $this->assertFalse($result->didSucceed());
+        $this->assertErrors($expected, $result->errors());
     }
 
     /**
      * @param string $name
-     * @return Attribute
+     * @return Attribute&MockObject
      */
-    protected function createAttribute(string $name): Attribute
+    protected function createAttribute(string $name): Attribute&MockObject
     {
         $attr = $this->createMock(Attribute::class);
         $attr->method('name')->willReturn($name);
@@ -100,9 +144,9 @@ class TestCase extends BaseTestCase
     /**
      * @param string $name
      * @param string $inverse
-     * @return Relation
+     * @return Relation&MockObject
      */
-    protected function createToOne(string $name, string $inverse): Relation
+    protected function createToOne(string $name, string $inverse): Relation&MockObject
     {
         $relation = $this->createMock(Relation::class);
         $relation->method('name')->willReturn($name);
@@ -117,9 +161,9 @@ class TestCase extends BaseTestCase
     /**
      * @param string $name
      * @param string $inverse
-     * @return Relation
+     * @return Relation&MockObject
      */
-    protected function createToMany(string $name, string $inverse): Relation
+    protected function createToMany(string $name, string $inverse): Relation&MockObject
     {
         $relation = $this->createMock(Relation::class);
         $relation->method('name')->willReturn($name);
