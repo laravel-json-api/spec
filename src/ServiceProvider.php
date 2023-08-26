@@ -21,7 +21,9 @@ namespace LaravelJsonApi\Spec;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use LaravelJsonApi\Contracts\Spec\ResourceDocumentComplianceChecker as ResourceDocumentComplianceCheckerContract;
+use LaravelJsonApi\Contracts\Spec\{
+    RelationshipDocumentComplianceChecker as RelationshipDocumentComplianceCheckerContract,
+    ResourceDocumentComplianceChecker as ResourceDocumentComplianceCheckerContract};
 
 class ServiceProvider extends BaseServiceProvider
 {
@@ -49,13 +51,19 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(Specification::class, static function (Application $app) {
-            return $app->make(JsonApiSpec::$specification);
-        });
+        $this->app->bind(
+            Specification::class,
+            static fn(Application $app) => $app->make(JsonApiSpec::$specification),
+        );
 
         $this->app->bind(
             ResourceDocumentComplianceCheckerContract::class,
             ResourceDocumentComplianceChecker::class,
+        );
+
+        $this->app->bind(
+            RelationshipDocumentComplianceCheckerContract::class,
+            RelationshipDocumentComplianceChecker::class,
         );
 
         $this->app->singleton(Translator::class);

@@ -19,32 +19,29 @@ declare(strict_types=1);
 
 namespace LaravelJsonApi\Spec;
 
-use LaravelJsonApi\Contracts\Spec\ResourceDocumentComplianceChecker as ResourceDocumentComplianceCheckerContract;
+use LaravelJsonApi\Contracts\Spec\RelationshipDocumentComplianceChecker as RelationshipDocumentComplianceCheckerContract;
 use LaravelJsonApi\Contracts\Support\Result as ResultContract;
 use LaravelJsonApi\Core\Exceptions\JsonApiException;
 use LaravelJsonApi\Core\Support\Result;
-use LaravelJsonApi\Core\Values\ResourceId;
 use LaravelJsonApi\Core\Values\ResourceType;
 
-class ResourceDocumentComplianceChecker implements ResourceDocumentComplianceCheckerContract
+class RelationshipDocumentComplianceChecker implements RelationshipDocumentComplianceCheckerContract
 {
     /**
-     * ResourceDocumentComplianceChecker constructor
+     * RelationshipDocumentComplianceChecker constructor
      *
-     * @param ResourceBuilder $builder
+     * @param RelationBuilder $builder
      */
-    public function __construct(private readonly ResourceBuilder $builder)
+    public function __construct(private readonly RelationBuilder $builder)
     {
     }
 
     /**
      * @inheritDoc
      */
-    public function mustSee(ResourceType|string $type, ResourceId|string $id = null): static
+    public function mustSee(ResourceType|string $type, string $fieldName): static
     {
-        $id = ($id === null) ? null : (string) $id;
-
-        $this->builder->expects((string) $type, $id);
+        $this->builder->expects((string) $type, $fieldName);
 
         return $this;
     }
