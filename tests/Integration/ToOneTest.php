@@ -49,7 +49,7 @@ class ToOneTest extends TestCase
     /**
      * @return array
      */
-    public function toOneProvider(): array
+    public static function toOneProvider(): array
     {
         return [
             'data:required' => [

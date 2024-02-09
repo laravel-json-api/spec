@@ -49,7 +49,7 @@ class ToManyTest extends TestCase
     /**
      * @return array
      */
-    public function toManyProvider(): array
+    public static function toManyProvider(): array
     {
         return [
             'data:required' => [

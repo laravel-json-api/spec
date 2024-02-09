@@ -61,7 +61,7 @@ class ResourceTest extends TestCase
     /**
      * @return array
      */
-    public function emptyIdProvider(): array
+    public static function emptyIdProvider(): array
     {
         return [
             [''],
@@ -73,7 +73,7 @@ class ResourceTest extends TestCase
     /**
      * @return array[]
      */
-    public function createProvider(): array
+    public static function createProvider(): array
     {
         return [
             'data:required' => [
@@ -698,7 +698,7 @@ class ResourceTest extends TestCase
     /**
      * @return array
      */
-    public function updateProvider(): array
+    public static function updateProvider(): array
     {
         return [
             'data.id:required' => [
@@ -781,7 +781,7 @@ class ResourceTest extends TestCase
     /**
      * @return array
      */
-    public function emptyStringProvider(): array
+    public static function emptyStringProvider(): array
     {
         return [
             [''],
@@ -838,7 +838,7 @@ class ResourceTest extends TestCase
     /**
      * @return array
      */
-    public function nonObjectProvider(): array
+    public static function nonObjectProvider(): array
     {
         return [
             ['true'],
