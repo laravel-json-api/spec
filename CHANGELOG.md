@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file. This project adheres to
 [Semantic Versioning](http://semver.org/) and [this changelog format](http://keepachangelog.com/).
 
+## Unreleased
+
+## [3.0.0] - 2024-03-14
+
+### Changed
+
+- Package is now licensed under the MIT license.
+- **BREAKING** Package now requires Laravel 11.
+- Minimum PHP version is now `8.2`.
+
+## [2.0.1] - 2023-10-29
+
+### Fixed
+
+- [#7](https://github.com/laravel-json-api/spec/pull/7) Fix translation keys in the PT-BR translation file.
+
 ## [2.0.0] - 2023-02-14
 
 ### Changed

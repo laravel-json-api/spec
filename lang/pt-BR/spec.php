@@ -1,18 +1,10 @@
 <?php
 /*
- * Copyright 2022 Cloud Creativity Limited
+ * Copyright 2024 Cloud Creativity Limited
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Use of this source code is governed by an MIT-style
+ * license that can be found in the LICENSE file or at
+ * https://opensource.org/licenses/MIT.
  */
 
 return [
@@ -37,7 +29,7 @@ return [
     'json_empty' => [
         'title' => 'JSON inválido',
         'detail' => 'Esperava-se JSON para se descodificar.',
-        'código' => '',
+        'code' => '',
     ],
 
     'json_error' => [
@@ -47,120 +39,120 @@ return [
     'json_not_object' => [
         'title' => 'JSON inválido',
         'detail' => 'Esperava-se um JSON para se descodificar num objeto.',
-        'código' => '',
+        'code' => '',
     ],
 
-    'membro_requerido' => [
+    'member_required' => [
         'title' => 'Documento JSON:API não compatível',
         'detail' => 'O membro :member é obrigatório.',
-        'código' => '',
+        'code' => '',
     ],
 
     'member_object_expected' => [
         'title' => 'Documento JSON:API não compatível',
         'detail' => 'O membro :member deve ser um objeto.',
-        'código' => '',
+        'code' => '',
     ],
 
     'member_array_expected' => [
         'title' => 'Documento JSON: API não compatível',
         'detail' => 'O membro :member deve ser um array.',
-        'código' => '',
+        'code' => '',
     ],
 
-    'membro_identificador_esperado' => [
+    'member_identifier_expected' => [
         'title' => 'Documento JSON:API não compatível',
         'detail' => 'O membro :member deve ser um identificador do recurso.',
-        'código' => '',
+        'code' => '',
     ],
 
     'member_string_expected' => [
         'title' => 'Documento JSON:API não compatível',
         'detail' => 'O membro :member deve ser uma string.',
-        'código' => '',
+        'code' => '',
     ],
 
-    'membro_vazio' => [
+    'member_empty' => [
         'title' => 'Documento JSON:API não compatível',
         'detail' => 'O membro :member não pode estar vazio.',
-        'código' => '',
+        'code' => '',
     ],
 
     'member_field_not_allowed' => [
         'title' => 'Documento JSON:API não compatível',
         'detail' => 'O membro :member não pode ter um campo :field.',
-        'código' => '',
+        'code' => '',
     ],
 
     'member_field_not_supported' => [
         'title' => 'Documento JSON:API não compatível',
         'detail' => 'O campo :field não é do tipo :type suportado.',
-        'código' => '',
+        'code' => '',
     ],
 
     'field_expects_to_one' => [
         'title' => 'Documento JSON:API não compatível',
         'detail' => 'O campo :field deve ser uma relação do tipo para-um.',
-        'código' => '',
+        'code' => '',
     ],
 
     'field_expects_to_many' => [
         'title' => 'Documento JSON: API não compatível',
         'detail' => 'O campo :field deve ser uma relação do tipo para-muitos.',
-        'código' => '',
+        'code' => '',
     ],
 
     'resource_type_not_supported' => [
         'title' => 'Não suportado',
         'detail' => 'O tipo de recurso :type não é suportado por este endpoint.',
-        'código' => '',
+        'code' => '',
     ],
 
     'resource_type_not_supported_by_to_one_relationship' => [
         'title' => 'Entidade não processável',
         'detail' => 'O campo :field deve ser uma relação do tipo para-um contendo recursos :types.',
-        'código' => '',
+        'code' => '',
     ],
 
     'resource_type_not_supported_by_to_many_relationship' => [
         'title' => 'Entidade não processável',
         'detail' => 'O: campo deve ser uuma relação do tipo para-muitos contendo recursos :types.',
-        'código' => '',
+        'code' => '',
     ],
 
     'resource_type_not_recognised' => [
         'title' => 'Não suportado',
         'detail' => 'O tipo de recurso :type não é reconhecido.',
-        'código' => '',
+        'code' => '',
     ],
 
     'resource_id_not_supported' => [
         'title' => 'Não suportado',
         'detail' => 'O ID do recurso :id não é suportado por este endpoint.',
-        'código' => '',
+        'code' => '',
     ],
 
     'resource_client_ids_not_supported' => [
         'title' => 'Não suportado',
         'detail' => 'O tipo de recurso :type não suporta IDs gerados pelo cliente.',
-        'código' => '',
+        'code' => '',
     ],
 
     'resource_exists' => [
         'title' => 'Conflito',
         'detail' => 'O recurso :id já existe.',
-        'código' => '',
+        'code' => '',
     ],
 
     'resource_not_found' => [
         'title' => 'Não encontrado',
         'detail' => 'O recurso relacionado não existe.',
-        'código' => '',
+        'code' => '',
     ],
 
     'resource_field_exists_in_attributes_and_relationships' => [
         'title' => 'Documento JSON:API não compatível',
         'detail' => 'O campo :field não pode existir como atributo e como relação.',
-        'código' => '',
+        'code' => '',
     ],
 ];
