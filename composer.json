@@ -46,8 +46,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-develop": "2.x-dev",
-            "dev-laravel11": "3.x-dev"
+            "dev-develop": "3.x-dev"
         },
         "laravel": {
             "providers": [
@@ -55,7 +54,7 @@
             ]
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "config": {
         "sort-packages": true
