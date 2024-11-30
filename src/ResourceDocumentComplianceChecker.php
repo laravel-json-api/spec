@@ -13,26 +13,26 @@ namespace LaravelJsonApi\Spec;
 
 use LaravelJsonApi\Contracts\Spec\ResourceDocumentComplianceChecker as ResourceDocumentComplianceCheckerContract;
 use LaravelJsonApi\Contracts\Support\Result as ResultContract;
+use LaravelJsonApi\Core\Bus\Commands\Result;
 use LaravelJsonApi\Core\Exceptions\JsonApiException;
-use LaravelJsonApi\Core\Support\Result;
 use LaravelJsonApi\Core\Values\ResourceId;
 use LaravelJsonApi\Core\Values\ResourceType;
 
-class ResourceDocumentComplianceChecker implements ResourceDocumentComplianceCheckerContract
+final readonly class ResourceDocumentComplianceChecker implements ResourceDocumentComplianceCheckerContract
 {
     /**
      * ResourceDocumentComplianceChecker constructor
      *
      * @param ResourceBuilder $builder
      */
-    public function __construct(private readonly ResourceBuilder $builder)
+    public function __construct(private ResourceBuilder $builder)
     {
     }
 
     /**
      * @inheritDoc
      */
-    public function mustSee(ResourceType|string $type, ResourceId|string $id = null): static
+    public function mustSee(ResourceType|string $type, ResourceId|string|null $id = null): static
     {
         $id = ($id === null) ? null : (string) $id;
 
