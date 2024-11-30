@@ -73,7 +73,7 @@ class Identifier extends Value
         Translator $translator,
         string $path,
         $value,
-        Relation $relation = null
+        ?Relation $relation = null
     ) {
         $this->spec = $spec;
         $this->translator = $translator;

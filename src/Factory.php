@@ -51,7 +51,7 @@ class Factory
      *      the relation the identifier exists in.
      * @return Identifier
      */
-    public function createIdentifierValue(string $path, $value, Relation $relation = null): Identifier
+    public function createIdentifierValue(string $path, $value, ?Relation $relation = null): Identifier
     {
         return new Identifier($this->spec, $this->translator, $path, $value, $relation);
     }
