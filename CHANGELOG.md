@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file. This projec
 
 ## Unreleased
 
+## [3.3.0] - 2026-03-28
+
+### Added
+
+- Package now supports Laravel 13.
+
+### Changed
+
+- Dropped support for `laravel-json-api/core` v4.
+
 ## [3.2.0] - 2025-02-24
 
 ### Added
@@ -53,7 +63,7 @@ All notable changes to this project will be documented in this file. This projec
 
 - The package now accepts `"0"` as a valid client generated id. Previously it was rejected with a message that the id
   could not be empty.
-- The package now accepts a document for a resource with an expected id of `"0"`. Previously the package did not 
+- The package now accepts a document for a resource with an expected id of `"0"`. Previously the package did not
   recognise zero as an expected id.
 
 ## [1.1.0] - 2022-02-09
