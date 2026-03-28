@@ -37,9 +37,6 @@ jobs:
           coverage: none
           ini-values: error_reporting=E_ALL
 
-      - name: Set Laravel JSON:API Core Version
-        run: composer require "laravel-json-api/core:^${{ matrix.core }}" --no-update
-
       - name: Set Laravel Version
         run: composer require "illuminate/contracts:^${{ matrix.laravel }}" --no-update
 
